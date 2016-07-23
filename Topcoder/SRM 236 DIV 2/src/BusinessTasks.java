@@ -1,22 +1,22 @@
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Queue;
+import java.util.*;
 
 public class BusinessTasks {
 	
 	public String getTask(String[] list, int n) {
-		Queue<String> queue = new ArrayDeque<String>();
-		Collections.addAll(queue, list);
-    int iterator = n;
-    while(queue.size() != 1) {
-      iterator--;
+		LinkedList<String> deque = new LinkedList<String>();
+		Collections.addAll(deque, list);
+    int iterator = (n % (deque.size()));
+    while(deque.size() != 1) {
       if(iterator == 0) {
-        queue.poll();
-        iterator = n;
+        deque.removeLast();
+        iterator = (n % deque.size());
       }
-      else
-        queue.offer(queue.poll());
+      else{
+        deque.offer(deque.removeFirst());
+        iterator--;
+      }
+
     }
-    return queue.peek();
+    return deque.peek();
 	}
 }

@@ -5,14 +5,14 @@ public class BusinessTasksTest {
 	
 	@Test(timeout=2000)
 	public void test0() {
-		String[] list = new String[] {"a","b","c","d"};
-		int n = 2;
-		assertEquals("a", new BusinessTasks().getTask(list, n));
+			String[] list = new String[] {"a","b","c","d"};
+		int n = 6;
+		assertEquals("c", new BusinessTasks().getTask(list, n));
 	}
 	
 	@Test(timeout=2000)
 	public void test1() {
-		String[] list = new String[] {"a","b","c","d","e"};
+		String[] list = new String[] {"a","b", "c","d","e"};
 		int n = 3;
 		assertEquals("d", new BusinessTasks().getTask(list, n));
 	}
