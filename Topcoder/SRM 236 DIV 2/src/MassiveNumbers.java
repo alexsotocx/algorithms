@@ -1,5 +1,3 @@
-
-
 public class MassiveNumbers {
 
   public String getLargest(String numberA, String numberB) {
