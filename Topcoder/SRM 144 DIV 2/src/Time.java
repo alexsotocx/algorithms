@@ -1,5 +1,5 @@
 public class Time {
-	public String whatTime(int seconds) {
+  public String whatTime(int seconds) {
     StringBuilder time = new StringBuilder();
     int h = seconds / 3600;
     time.append(h).append(':');
