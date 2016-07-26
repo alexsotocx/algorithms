@@ -1,43 +1,47 @@
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SmartWordToy {
-
-  int[][][][] dist = new int[26][26][26][26];
-
-  private Position[] states(Position stateP) {
-    int[] state = new int[]{stateP.a, stateP.b, stateP.c, stateP.d};
-    Position[] states = new Position[8];
+public class SmartWordToyInt {
+  private int[] states(char[] state) {
+    int[] states = new int[8];
+    //First
     for (int i = 0, j = 0; i < 4; i++) {
-      int aux = state[i];
-      state[i] = (state[i] + 1) % 26;
-      states[j++] = new Position(state);
+      char aux = state[i];
+      state[i] = (char) (((state[i] - 'a' + 1) % 26) + 'a');
+      states[j++] = encode(state);
       state[i] = aux;
-      state[i] = (state[i] + 25) % 26;
-      states[j++] = new Position(state);
+      state[i] = (char) (((state[i] + 25 - 'a') % 26) + 'a');
+      states[j++] = encode(state);
       state[i] = aux;
     }
-    //System.out.println(Arrays.toString(states));
     return states;
   }
 
 
   public int minPresses(String start, String finish, String[] forbid) {
-    preprocess(forbid);
-    Position pStart = new Position(start);
-    Position pFinish = new Position(finish);
-    dist[pStart.a][pStart.b][pStart.c][pStart.d] = 0;
-    Queue<Position> queue = new LinkedList<Position>();
-    queue.offer(pStart);
+    int encodedStart = encode(start.toCharArray());
+    int encondedFinish = encode(finish.toCharArray());
+    int[] dist = new int[1 + encode(new char[]{'z', 'z', 'z', 'z'})];
+    for (String forb : forbid) {
+      String[] s = forb.split("\\s");
+      for (char i : s[0].toCharArray())
+        for (char j : s[1].toCharArray())
+          for (char k : s[2].toCharArray())
+            for (char l : s[3].toCharArray())
+              dist[encode(new char[]{i, j, k, l})] = -10;
+    }
+    dist[encodedStart] = 0;
+    Queue<Integer> queue = new LinkedList<Integer>();
+    queue.offer(encodedStart);
     while (!queue.isEmpty()) {
-      Position state = queue.poll();
-      if (state.equals(pFinish)) {
-        return state.getDist();
+      int state = queue.poll();
+      if (state == encondedFinish) {
+        return dist[state];
       }
-      for (Position s : states(state)) {
-        if (s.getDist() == 0) {
-          s.setDist(state.getDist() + 1);
+      char[] charState = decode(state);
+      for (int s : states(charState)) {
+        if (dist[s] == 0) {
+          dist[s] = dist[state] + 1;
           queue.add(s);
         }
       }
@@ -46,58 +50,24 @@ public class SmartWordToy {
     return -1;
   }
 
-
-  private void preprocess(String[] forbid) {
-    for (String s : forbid) {
-      String[] str = s.split("\\s");
-      for (char i : str[0].toCharArray())
-        for (char j : str[1].toCharArray())
-          for (char m : str[2].toCharArray())
-            for (char n : str[3].toCharArray())
-              dist[i - 'a'][j - 'a'][m - 'a'][n - 'a'] = -10;
+  private char[] decode(int encoded) {
+    char[] decoded = new char[4];
+    int full_1 = (1 << 5) - 1;
+    for (int i = 3; i >= 0; i--) {
+      int temp = (encoded & (full_1 << (i * 5)));
+      temp = (temp >> (i * 5));
+      decoded[3 - i] = (char) (temp + 'a');
     }
+    return decoded;
   }
 
-  class Position {
-    int a, b, c, d;
-
-    public Position(int[] pos) {
-      this.a = pos[0];
-      this.b = pos[1];
-      this.c = pos[2];
-      this.d = pos[3];
+  private int encode(char[] enconded) {
+    int decoded = 0;
+    for (int i = enconded.length - 1, j = 0; i >= 0; i--, j += 5) {
+      int y = enconded[i] - 'a';
+      decoded |= (y << j);
     }
-
-
-    public Position(String pos) {
-      this.a = pos.charAt(0) - 'a';
-      this.b = pos.charAt(1) - 'a';
-      this.c = pos.charAt(2) - 'a';
-      this.d = pos.charAt(3) - 'a';
-    }
-
-    int getDist() {
-      return dist[a][b][c][d];
-    }
-
-    void setDist(int value) {
-      dist[a][b][c][d] = value;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof Position) {
-        Position instance = (Position) obj;
-        return instance.a == this.a && instance.b == this.b && instance.c == this.c && instance.d == this.d;
-      }
-      return false;
-    }
-
-    @Override
-    public String toString() {
-      return Arrays.toString(new char[]{(char) (this.a + 'a'), (char) (this.b + 'a'), (char) (this.c + 'a'), (char) (this.d + 'a')});
-    }
+    return decoded;
   }
-
 
 }
