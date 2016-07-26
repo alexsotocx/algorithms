@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SmartWordToyInt {
+public class SmartWordToy {
   private int[] states(char[] state) {
     int[] states = new int[8];
     //First
