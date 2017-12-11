@@ -4,6 +4,6 @@ class CCipher:
     ans = []
     m = len(voc)
     for i in cipherText:
-      val = ((i - ord('A'))  - shift + m) % m
+      val = ((ord(i) - ord('A'))  - shift + m) % m
       ans.append(voc[val])
     return(''.join(ans))
