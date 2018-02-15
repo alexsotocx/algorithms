@@ -38,3 +38,6 @@ hs_err_pid*
 **/crashlytics.properties
 **/crashlytics-build.properties
 **/fabric.properties
+
+
+*.pyc
