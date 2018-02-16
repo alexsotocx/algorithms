@@ -14,26 +14,26 @@ for link in generate_list():
 
 print "deletion at the middle"
 linked_list = generate_list()
-linked_list.delete(2)
+linked_list.delete(linked_list.find(2))
 for link in linked_list:
   print(link.data)
 
 print "deletion at the start"
 linked_list = generate_list()
-linked_list.delete(3)
+linked_list.delete(linked_list.find(3))
 for link in linked_list:
   print(link.data)
 
 print "deletion at the end"
 linked_list = generate_list()
-linked_list.delete(5)
+linked_list.delete(linked_list.find(5))
 for link in linked_list:
   print(link.data)
 
 print "deletion when is just one element"
 linked_list = DoubleLinkedList()
 linked_list.append(1)
-linked_list.delete(1)
+linked_list.delete(linked_list.find(1))
 if linked_list.first is None and linked_list.last is None and linked_list.empty():
   print("it is an empty list")
 

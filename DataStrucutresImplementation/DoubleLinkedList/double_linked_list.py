@@ -55,8 +55,7 @@ class DoubleLinkedList:
         return link
     return None
 
-  def delete(self, data):
-    link = self.find(data)
+  def delete(self, link):
     if link is not None:
       if link.prev is None: # Is the first one
         next_link = self.first.next
@@ -76,6 +75,8 @@ class DoubleLinkedList:
         link.prev.next = link.next
         link.next.prev = link.prev
       self.size -= 1
+      return link
+    return None
 
   def __iter__(self):
     return LinkIterator(self.first)
