@@ -62,15 +62,20 @@ class DoubleLinkedList:
         next_link = self.first.next
         if next_link is not None:
           next_link.prev = None
+        else:
+          self.last = None
         self.first = next_link
       elif link.next is None: # Is the last one
         last_link = self.last.prev
         if last_link is not None:
           last_link.next = None
+        else:
+          self.first = None
         self.last = last_link
       else: # In the middle
         link.prev.next = link.next
         link.next.prev = link.prev
+      self.size -= 1
 
   def __iter__(self):
     return LinkIterator(self.first)
