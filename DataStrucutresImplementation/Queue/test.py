@@ -18,4 +18,4 @@ print "is queue empty = %s" % (q.empty())
 
 q.insert(6)
 
-print "Top method returns the first without removing it, size before top: %s, first: %s, size after top: %s" % (len(q), q.top(), len(q))
+print "Top method returns the first without removing it, size before top: %s, first: %s, size after first: %s" % (len(q), q.first(), len(q))

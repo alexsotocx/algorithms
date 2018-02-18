@@ -3,7 +3,7 @@ sys.path.append('../DoubleLinkedList')
 
 from double_linked_list import DoubleLinkedList
 
-class Queue:
+class Stack:
   def __init__(self):
     self.__linked_list = DoubleLinkedList()
 
@@ -23,4 +23,4 @@ class Queue:
     return self.__linked_list.size
 
   def insert(self, data):
-    self.__linked_list.append(data)
+    self.__linked_list.prepend(data)
