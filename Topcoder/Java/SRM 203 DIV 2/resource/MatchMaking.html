@@ -1,0 +1,95 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>
+<p>
+
+You are developing the matchmaking component of an online dating site. Prospective
+members must fill out a questionnaire consisting of
+binary questions such as <i>Do you prefer to vacation (<b>a</b>)
+in the mountains or (<b>b</b>) at the seaside?</i> and <i>Would you rather 
+travel (<b>a</b>) by plane or (<b>b</b>) by train?</i>
+
+</p>
+<p>
+
+You are to match up men with women by maximizing the number of answers
+each couple has in common. A man and a woman have an answer in common
+whenever they give the same answer to the same question. Conflicts
+can easily arise due to numerical ties,
+but you will be able to resolve all such conflicts using 
+the following procedure. Note that there will be equal numbers of men and
+women, with names being unique in each sex.
+
+</p>
+<p>
+
+Take the woman whose name comes earliest
+in lexicographic order, and consider the men with whom she has the greatest number of
+answers in common. Among these men, pick the one whose name comes earliest in lexicographic
+order. You have found the woman's best match. Remove this couple from
+the dating pool, and repeat the matching procedure until there are no
+more singles left. 
+
+</p>
+<p>
+
+You are given a String[], <b>namesWomen</b>, containing
+the names of single women, and another String[],
+<b>answersWomen</b>, containing their answers. The <i>k</i>th
+element of <b>answersWomen</b> lists the answers of the woman whose name
+is the <i>k</i>th element of <b>namesWomen</b>. If there are <i>n</i>
+questions in the questionnaire, then every element of <b>answersWomen</b>
+consists of <i>n</i> characters, each of which is either 'a' or 
+'b'. The answers are always given in the fixed questionnaire order. You
+are similarly given the String[]s <b>namesMen</b> and
+<b>answersMen</b> for the single men. Lastly, you are given
+a String, <b>queryWoman</b>, containing the name of a woman.
+Return the name of the man to whom she is matched after you have formed
+all couples according to the above rules.
+
+</p>
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>MatchMaking</td></tr><tr><td>Method:</td><td>makeMatch</td></tr><tr><td>Parameters:</td><td>String[], String[], String[], String[], String</td></tr><tr><td>Returns:</td><td>String</td></tr><tr><td>Method signature:</td><td>String makeMatch(String[] namesWomen, String[] answersWomen, String[] namesMen, String[] answersMen, String queryWoman)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>64</td></tr></table></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>Lexicographic order is like dictionary order, with the difference that case matters. All uppercase letters take precedence over all lowercase letters. Thus, &quot;boolean&quot; comes before &quot;boot&quot;; &quot;boo&quot; comes before &quot;boolean&quot;; &quot;Boot&quot; comes before &quot;boo&quot;; &quot;Zoo&quot; comes before &quot;boo&quot;.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>namesWomen</b> contains between 1 and 50 elements, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>if <b>namesWomen</b> consists of <i>n</i> elements, then <b>answersWomen</b>, <b>namesMen</b>, and <b>answersMen</b> consist of <i>n</i> elements each</td></tr><tr><td align="center" valign="top">-</td><td>each element of <b>namesWomen</b> and each element of <b>namesMen</b> is between 1 and 50 characters long, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>the only characters that may appear in <b>namesMen</b> and <b>namesWomen</b> are 'a' to 'z' and 'A' to 'Z'</td></tr><tr><td align="center" valign="top">-</td><td>no two elements of <b>namesWomen</b> are alike</td></tr><tr><td align="center" valign="top">-</td><td>no two elements of <b>namesMen</b> are alike</td></tr><tr><td align="center" valign="top">-</td><td>the first element of <b>answersWomen</b> is between 1 and 50 characters long, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>if the first element of <b>answersWomen</b> consists of <i>m</i> characters, then each element of <b>answersWomen</b> and of <b>answersMen</b> is <i>m</i> characters long</td></tr><tr><td align="center" valign="top">-</td><td>the only characters that may appear in <b>answersWomen</b> and <b>answersMen</b> are 'a' and 'b'</td></tr><tr><td align="center" valign="top">-</td><td><b>queryWoman</b> is one of the Strings in <b>namesWomen</b></td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Constance&quot;, &quot;Bertha&quot;, &quot;Alice&quot;}</pre></td></tr><tr><td><pre>{&quot;aaba&quot;, &quot;baab&quot;, &quot;aaaa&quot;}</pre></td></tr><tr><td><pre>{&quot;Chip&quot;, &quot;Biff&quot;, &quot;Abe&quot;}</pre></td></tr><tr><td><pre>{&quot;bbaa&quot;, &quot;baaa&quot;, &quot;aaab&quot;}</pre></td></tr><tr><td><pre>&quot;Bertha&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Biff&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">Alice has two answers in common with Chip and three answers in common with both Abe and Biff; Abe gets lexicographic preference. Bertha also has two answers in common with Chip and three answers in common with both Abe and Biff. Since Abe has already been matched to Alice, Bertha lands Biff.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Constance&quot;, &quot;Bertha&quot;, &quot;Alice&quot;}</pre></td></tr><tr><td><pre>{&quot;aaba&quot;, &quot;baab&quot;, &quot;aaaa&quot;}</pre></td></tr><tr><td><pre>{&quot;Chip&quot;, &quot;Biff&quot;, &quot;Abe&quot;}</pre></td></tr><tr><td><pre>{&quot;bbaa&quot;, &quot;baaa&quot;, &quot;aaab&quot;}</pre></td></tr><tr><td><pre>&quot;Constance&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Chip&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">We are dealing with the same names and answers as before. Constance is the last to go. Although she has two answers in common with Abe and Biff, they are both taken. She ends up with Chip, with whom she has only one answer in common.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Constance&quot;, &quot;Alice&quot;, &quot;Bertha&quot;, &quot;Delilah&quot;, &quot;Emily&quot;}</pre></td></tr><tr><td><pre>{&quot;baabaa&quot;, &quot;ababab&quot;, &quot;aaabbb&quot;, &quot;bababa&quot;, &quot;baabba&quot;}</pre></td></tr><tr><td><pre>{&quot;Ed&quot;, &quot;Duff&quot;, &quot;Chip&quot;, &quot;Abe&quot;, &quot;Biff&quot;}</pre></td></tr><tr><td><pre>{&quot;aabaab&quot;, &quot;babbab&quot;, &quot;bbbaaa&quot;, &quot;abbbba&quot;, &quot;abaaba&quot;}</pre></td></tr><tr><td><pre>&quot;Constance&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Duff&quot;</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Constance&quot;, &quot;Alice&quot;, &quot;Bertha&quot;, &quot;Delilah&quot;, &quot;Emily&quot;}</pre></td></tr><tr><td><pre>{&quot;baabaa&quot;, &quot;ababab&quot;, &quot;aaabbb&quot;, &quot;bababa&quot;, &quot;baabba&quot;}</pre></td></tr><tr><td><pre>{&quot;Ed&quot;, &quot;Duff&quot;, &quot;Chip&quot;, &quot;Abe&quot;, &quot;Biff&quot;}</pre></td></tr><tr><td><pre>{&quot;aabaab&quot;, &quot;babbab&quot;, &quot;bbbaaa&quot;, &quot;abbbba&quot;, &quot;abaaba&quot;}</pre></td></tr><tr><td><pre>&quot;Delilah&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Chip&quot;</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Constance&quot;, &quot;Alice&quot;, &quot;Bertha&quot;, &quot;Delilah&quot;, &quot;Emily&quot;}</pre></td></tr><tr><td><pre>{&quot;baabaa&quot;, &quot;ababab&quot;, &quot;aaabbb&quot;, &quot;bababa&quot;, &quot;baabba&quot;}</pre></td></tr><tr><td><pre>{&quot;Ed&quot;, &quot;Duff&quot;, &quot;Chip&quot;, &quot;Abe&quot;, &quot;Biff&quot;}</pre></td></tr><tr><td><pre>{&quot;aabaab&quot;, &quot;babbab&quot;, &quot;bbbaaa&quot;, &quot;abbbba&quot;, &quot;abaaba&quot;}</pre></td></tr><tr><td><pre>&quot;Emily&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Ed&quot;</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;anne&quot;, &quot;Zoe&quot;}</pre></td></tr><tr><td><pre>{&quot;a&quot;, &quot;a&quot;}</pre></td></tr><tr><td><pre>{&quot;bob&quot;, &quot;chuck&quot;}</pre></td></tr><tr><td><pre>{&quot;a&quot;, &quot;a&quot;}</pre></td></tr><tr><td><pre>&quot;Zoe&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;bob&quot;</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">6)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;F&quot;, &quot;M&quot;, &quot;S&quot;, &quot;h&quot;, &quot;q&quot;, &quot;g&quot;, &quot;r&quot;, &quot;N&quot;, &quot;U&quot;, &quot;x&quot;, &quot;H&quot;, &quot;P&quot;,
+ &quot;o&quot;, &quot;E&quot;, &quot;R&quot;, &quot;z&quot;, &quot;L&quot;, &quot;m&quot;, &quot;e&quot;, &quot;u&quot;, &quot;K&quot;, &quot;A&quot;, &quot;w&quot;, &quot;Q&quot;,
+ &quot;O&quot;, &quot;v&quot;, &quot;j&quot;, &quot;a&quot;, &quot;t&quot;, &quot;p&quot;, &quot;C&quot;, &quot;G&quot;, &quot;k&quot;, &quot;c&quot;, &quot;V&quot;, &quot;B&quot;,
+ &quot;D&quot;, &quot;s&quot;, &quot;n&quot;, &quot;i&quot;, &quot;f&quot;, &quot;T&quot;, &quot;I&quot;, &quot;l&quot;, &quot;d&quot;, &quot;J&quot;, &quot;y&quot;, &quot;b&quot;}</pre></td></tr><tr><td><pre>{&quot;abaabbbb&quot;, &quot;bbaabbbb&quot;, &quot;aaabaaab&quot;, &quot;aabbaaaa&quot;, &quot;baabbaab&quot;,
+ &quot;aaababba&quot;, &quot;bbabbbbb&quot;, &quot;bbbabbba&quot;, &quot;aaabbbba&quot;, &quot;aabbbaaa&quot;,
+ &quot;abbabaaa&quot;, &quot;babbabbb&quot;, &quot;aaaaabba&quot;, &quot;aaaabbaa&quot;, &quot;abbbabaa&quot;,
+ &quot;babababa&quot;, &quot;abbaaaaa&quot;, &quot;bbababba&quot;, &quot;baaaaaba&quot;, &quot;baaaaabb&quot;,
+ &quot;bbbbabba&quot;, &quot;ababbaaa&quot;, &quot;abbbabab&quot;, &quot;baabbbaa&quot;, &quot;bbbaabbb&quot;,
+ &quot;aababbab&quot;, &quot;ababbabb&quot;, &quot;abbaabba&quot;, &quot;baabbabb&quot;, &quot;aaabaaab&quot;,
+ &quot;aabbbaba&quot;, &quot;aabaaabb&quot;, &quot;abababba&quot;, &quot;aabbaaaa&quot;, &quot;aabbabaa&quot;,
+ &quot;bababaaa&quot;, &quot;aabaaaab&quot;, &quot;bbbbaabb&quot;, &quot;baaababb&quot;, &quot;abaabbab&quot;,
+ &quot;aabbbaaa&quot;, &quot;baabbaba&quot;, &quot;bbabbbaa&quot;, &quot;aabbbbaa&quot;, &quot;abbbaaab&quot;,
+ &quot;abababbb&quot;, &quot;ababaaba&quot;, &quot;bababaaa&quot;}</pre></td></tr><tr><td><pre>{&quot;f&quot;, &quot;C&quot;, &quot;v&quot;, &quot;g&quot;, &quot;Q&quot;, &quot;z&quot;, &quot;n&quot;, &quot;c&quot;, &quot;B&quot;, &quot;o&quot;, &quot;M&quot;, &quot;F&quot;,
+ &quot;u&quot;, &quot;x&quot;, &quot;I&quot;, &quot;T&quot;, &quot;K&quot;, &quot;L&quot;, &quot;E&quot;, &quot;U&quot;, &quot;w&quot;, &quot;A&quot;, &quot;d&quot;, &quot;t&quot;,
+ &quot;e&quot;, &quot;R&quot;, &quot;D&quot;, &quot;s&quot;, &quot;p&quot;, &quot;q&quot;, &quot;m&quot;, &quot;r&quot;, &quot;H&quot;, &quot;j&quot;, &quot;J&quot;, &quot;V&quot;,
+ &quot;l&quot;, &quot;a&quot;, &quot;k&quot;, &quot;h&quot;, &quot;G&quot;, &quot;y&quot;, &quot;i&quot;, &quot;P&quot;, &quot;O&quot;, &quot;N&quot;, &quot;b&quot;, &quot;S&quot;}</pre></td></tr><tr><td><pre>{&quot;bbbaabab&quot;, &quot;bbabaabb&quot;, &quot;ababbbbb&quot;, &quot;bbbababb&quot;, &quot;baababaa&quot;,
+ &quot;bbaaabab&quot;, &quot;abbabbaa&quot;, &quot;bbbabbbb&quot;, &quot;aabbabab&quot;, &quot;abbababa&quot;,
+ &quot;aababbbb&quot;, &quot;bababaab&quot;, &quot;aaababbb&quot;, &quot;baabbaba&quot;, &quot;abaaaaab&quot;,
+ &quot;bbaababa&quot;, &quot;babaabab&quot;, &quot;abbabbba&quot;, &quot;ababbbab&quot;, &quot;baabbbab&quot;,
+ &quot;babbaaab&quot;, &quot;abbbbaba&quot;, &quot;bbabbbba&quot;, &quot;baaabaab&quot;, &quot;ababbabb&quot;,
+ &quot;abbbaabb&quot;, &quot;bbbbaabb&quot;, &quot;bbbaaabb&quot;, &quot;baabbaba&quot;, &quot;bbabaaab&quot;,
+ &quot;aabbbaab&quot;, &quot;abbbbabb&quot;, &quot;bbaaaaba&quot;, &quot;bbbababa&quot;, &quot;abbaabba&quot;,
+ &quot;bababbbb&quot;, &quot;aabaaabb&quot;, &quot;babbabab&quot;, &quot;baaaabaa&quot;, &quot;ababbaba&quot;,
+ &quot;aaabaabb&quot;, &quot;bbaaabaa&quot;, &quot;baaaaabb&quot;, &quot;bbaabaab&quot;, &quot;bbababab&quot;,
+ &quot;aabaaaab&quot;, &quot;aaaaabab&quot;, &quot;aabbaaba&quot;}</pre></td></tr><tr><td><pre>&quot;U&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;x&quot;</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">7)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;q&quot;, &quot;M&quot;, &quot;w&quot;, &quot;y&quot;, &quot;p&quot;, &quot;N&quot;, &quot;s&quot;, &quot;r&quot;, &quot;a&quot;, &quot;H&quot;, &quot;o&quot;, &quot;n&quot;,
+ &quot;F&quot;, &quot;m&quot;, &quot;l&quot;, &quot;b&quot;, &quot;D&quot;, &quot;j&quot;, &quot;C&quot;, &quot;u&quot;, &quot;f&quot;, &quot;I&quot;, &quot;g&quot;, &quot;L&quot;,
+ &quot;i&quot;, &quot;x&quot;, &quot;A&quot;, &quot;G&quot;, &quot;O&quot;, &quot;k&quot;, &quot;h&quot;, &quot;d&quot;, &quot;c&quot;, &quot;E&quot;, &quot;B&quot;, &quot;v&quot;,
+ &quot;J&quot;, &quot;z&quot;, &quot;K&quot;, &quot;e&quot;, &quot;t&quot;}</pre></td></tr><tr><td><pre>{&quot;aabbaaabb&quot;, &quot;baabababb&quot;, &quot;bbaababba&quot;, &quot;bbbaaaaaa&quot;, &quot;abaaaabaa&quot;,
+ &quot;bababbbab&quot;, &quot;abbaabbaa&quot;, &quot;aabababbb&quot;, &quot;bababaaaa&quot;, &quot;abbababaa&quot;,
+ &quot;aabbbbbba&quot;, &quot;bbabbabab&quot;, &quot;babaabbba&quot;, &quot;babbabbbb&quot;, &quot;baaabbbbb&quot;,
+ &quot;baaabaaaa&quot;, &quot;aaabbaaab&quot;, &quot;abbaabbbb&quot;, &quot;abbabbbab&quot;, &quot;bbaaaabba&quot;,
+ &quot;babbaaabb&quot;, &quot;aabbabbab&quot;, &quot;baaababba&quot;, &quot;ababaabab&quot;, &quot;bbbaabbab&quot;,
+ &quot;aaaabbabb&quot;, &quot;babaaaaaa&quot;, &quot;abbbbaaab&quot;, &quot;aabaaabba&quot;, &quot;bbbaaaaba&quot;,
+ &quot;bbbbbbaab&quot;, &quot;aabbaaabb&quot;, &quot;aabaabbab&quot;, &quot;aababaaba&quot;, &quot;bbabbbbab&quot;,
+ &quot;abbabaaab&quot;, &quot;babaaabbb&quot;, &quot;bababbaaa&quot;, &quot;aabbaabaa&quot;, &quot;baaabbabb&quot;,
+ &quot;bbbbbbbbb&quot;}</pre></td></tr><tr><td><pre>{&quot;m&quot;, &quot;k&quot;, &quot;n&quot;, &quot;q&quot;, &quot;L&quot;, &quot;E&quot;, &quot;M&quot;, &quot;l&quot;, &quot;w&quot;, &quot;x&quot;, &quot;g&quot;, &quot;e&quot;,
+ &quot;i&quot;, &quot;z&quot;, &quot;F&quot;, &quot;r&quot;, &quot;a&quot;, &quot;h&quot;, &quot;f&quot;, &quot;D&quot;, &quot;J&quot;, &quot;K&quot;, &quot;j&quot;, &quot;v&quot;,
+ &quot;A&quot;, &quot;t&quot;, &quot;N&quot;, &quot;y&quot;, &quot;s&quot;, &quot;c&quot;, &quot;o&quot;, &quot;p&quot;, &quot;d&quot;, &quot;b&quot;, &quot;B&quot;, &quot;G&quot;,
+ &quot;O&quot;, &quot;I&quot;, &quot;u&quot;, &quot;C&quot;, &quot;H&quot;}</pre></td></tr><tr><td><pre>{&quot;bbaaabbba&quot;, &quot;bbaaaaaab&quot;, &quot;abaaababb&quot;, &quot;baaaabbbb&quot;, &quot;abbbababa&quot;,
+ &quot;baaaaaaaa&quot;, &quot;aabbbbbab&quot;, &quot;aaaaabbba&quot;, &quot;baabababb&quot;, &quot;babaaabab&quot;,
+ &quot;baaababaa&quot;, &quot;bbbbaabba&quot;, &quot;bbaabbabb&quot;, &quot;bbaaababb&quot;, &quot;abbabbaba&quot;,
+ &quot;aababaaab&quot;, &quot;abbbbbbaa&quot;, &quot;aabbaabaa&quot;, &quot;bbbaabbba&quot;, &quot;abbabbaba&quot;,
+ &quot;aaabbbaaa&quot;, &quot;bbaabaaaa&quot;, &quot;aabababbb&quot;, &quot;abbbbabab&quot;, &quot;baaabbbba&quot;,
+ &quot;bababbbba&quot;, &quot;aababbaab&quot;, &quot;bbaabbaab&quot;, &quot;bbbaaabbb&quot;, &quot;babbbbabb&quot;,
+ &quot;ababababb&quot;, &quot;babaaabab&quot;, &quot;bbaaaaaba&quot;, &quot;aaaaabaaa&quot;, &quot;abbaaabbb&quot;,
+ &quot;bbbbababb&quot;, &quot;baabababb&quot;, &quot;bbaabaaaa&quot;, &quot;aaababbbb&quot;, &quot;abbbbbbba&quot;,
+ &quot;bbaabbaaa&quot;}</pre></td></tr><tr><td><pre>&quot;o&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;C&quot;</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

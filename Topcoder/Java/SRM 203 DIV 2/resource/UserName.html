@@ -1,0 +1,41 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+
+You are implementing the member registration system of an online dating
+site. When a new member signs up, it is possible that she initially
+chooses the same username as an existing member. The system must then
+inform the new member of the conflict and suggest a variant of the chosen
+name with a number attached to the end.
+
+</p>
+<p>
+
+If an existing member is named &quot;FunkyMonkey&quot;, for example, and
+a new member wants the same username, the simplest suggestion the system
+can make is &quot;FunkyMonkey1&quot;.  If there is already a member by
+that name, the system must suggest &quot;FunkyMonkey2&quot;, unless that 
+variant is also taken. If all names from &quot;FunkyMonkey1&quot;
+through &quot;FunkyMonkey9&quot; are taken as well as the
+original &quot;FunkyMonkey&quot;, the system moves on to consider 
+&quot;FunkyMonkey10&quot;, and so on. The goal is to use the smallest possible
+number in the variant. Note that each username consists of letters (the characters
+from 'a' to 'z' and from 'A' to 'Z') and numerals ('0' to '9').
+
+</p>
+<p>
+
+You are given a String[], <b>existingNames</b>, containing
+all usernames that have already been registered in the system. You are
+also given a single String, <b>newName</b>, containing the
+username that a new member wants to use. In the event of a conflict, this
+member will accept the suggestion offered by your system in accordance
+with the principles above. Return a String containing the
+username finally assigned to the new member.
+
+</p>
+
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>UserName</td></tr><tr><td>Method:</td><td>newMember</td></tr><tr><td>Parameters:</td><td>String[], String</td></tr><tr><td>Returns:</td><td>String</td></tr><tr><td>Method signature:</td><td>String newMember(String[] existingNames, String newName)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>64</td></tr></table></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>The constraints rule out names that end in a number with a leading zero, such as &quot;grokster006&quot; and &quot;bart0&quot;.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>existingNames</b> contains between 1 and 50 elements, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>each element of <b>existingNames</b> is between 1 and 50 characters long, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>the only characters permitted in elements of <b>existingNames</b> are 'a' to 'z', 'A' to 'Z', and '0' to '9'</td></tr><tr><td align="center" valign="top">-</td><td>no element of <b>existingNames</b> ends in a number that has a leading zero</td></tr><tr><td align="center" valign="top">-</td><td><b>newName</b> is between 1 and 50 characters long, inclusive</td></tr><tr><td align="center" valign="top">-</td><td>the only characters permitted in <b>newName</b> are 'a' to 'z' and 'A' to 'Z'</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;MasterOfDisaster&quot;, &quot;DingBat&quot;, &quot;Orpheus&quot;, &quot;WolfMan&quot;, &quot;MrKnowItAll&quot;}</pre></td></tr><tr><td><pre>&quot;TygerTyger&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;TygerTyger&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">&quot;TygerTyger&quot; is available.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;MasterOfDisaster&quot;, &quot;TygerTyger1&quot;, &quot;DingBat&quot;, &quot;Orpheus&quot;, 
+ &quot;TygerTyger&quot;, &quot;WolfMan&quot;, &quot;MrKnowItAll&quot;}</pre></td></tr><tr><td><pre>&quot;TygerTyger&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;TygerTyger2&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">&quot;TygerTyger&quot; and &quot;TygerTyger1&quot; are taken.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;TygerTyger2000&quot;, &quot;TygerTyger1&quot;, &quot;MasterDisaster&quot;, &quot;DingBat&quot;, 
+ &quot;Orpheus&quot;, &quot;WolfMan&quot;, &quot;MrKnowItAll&quot;}</pre></td></tr><tr><td><pre>&quot;TygerTyger&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;TygerTyger&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">There are higher-numbered variants of &quot;TygerTyger&quot;, but the base name is available.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;grokster2&quot;, &quot;BrownEyedBoy&quot;, &quot;Yoop&quot;, &quot;BlueEyedGirl&quot;, 
+ &quot;grokster&quot;, &quot;Elemental&quot;, &quot;NightShade&quot;, &quot;Grokster1&quot;}</pre></td></tr><tr><td><pre>&quot;grokster&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;grokster1&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">Note that &quot;Grokster1&quot; is not the same as &quot;grokster1&quot;.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;Bart4&quot;, &quot;Bart5&quot;, &quot;Bart6&quot;, &quot;Bart7&quot;, &quot;Bart8&quot;, &quot;Bart9&quot;, &quot;Bart10&quot;,
+ &quot;Lisa&quot;, &quot;Marge&quot;, &quot;Homer&quot;, &quot;Bart&quot;, &quot;Bart1&quot;, &quot;Bart2&quot;, &quot;Bart3&quot;,
+ &quot;Bart11&quot;, &quot;Bart12&quot;}</pre></td></tr><tr><td><pre>&quot;Bart&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Bart13&quot;</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
