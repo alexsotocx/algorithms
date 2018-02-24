@@ -1,8 +1,7 @@
+package datastructures;
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
-public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link<T>>{
+public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
   private Link<T> first;
   private Link<T> last;
   private int size = 0;
@@ -47,11 +46,11 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link<T>>{
   }
 
   @Override
-  public Iterator<Link<T>> iterator() {
+  public Iterator<Link> iterator() {
     return new LinkIterator(first);
   }
 
-  class LinkIterator implements Iterator<Link<T>> {
+  class LinkIterator implements Iterator<Link> {
     private Link<T> current;
     private boolean isFirst = true;
 
@@ -61,7 +60,7 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link<T>>{
 
     @Override
     public boolean hasNext() {
-      return (current != null && isFirst) || (current != null && current.next != null);
+      return (current != null);
     }
 
     @Override
@@ -77,7 +76,7 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link<T>>{
     }
   }
 
-  private class Link<T> {
+  public class Link<T> {
     T data;
     Link<T> next;
     Link<T> prev;
