@@ -41,6 +41,41 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
     return null;
   }
 
+  public Link<T> delete(Link<T> linkToDelete) {
+    if(linkToDelete == null) return null;
+    if(linkToDelete.prev == null) deleteFirst();
+    else if (linkToDelete.next == null) deleteLast();
+    else {
+      linkToDelete.next.prev = linkToDelete.prev;
+      linkToDelete.prev.next = linkToDelete.next;
+    }
+
+    this.size--;
+    return linkToDelete;
+  }
+
+  public Link<T> deleteFirst() {
+    Link<T> temp = this.first;
+    this.first.next.prev = null;
+    this.first = this.first.next;
+    return temp;
+  }
+
+  public Link<T> deleteLast() {
+    Link<T> temp = this.last;
+    this.last.prev.next = null;
+    this.last = this.last.prev;
+    return temp;
+  }
+
+  public Link<T> getFirst() {
+    return this.first;
+  }
+
+  public Link<T> getLast() {
+    return this.last;
+  }
+
   public boolean isEmpty() {
     return size == 0;
   }
