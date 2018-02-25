@@ -32,9 +32,20 @@ public class DoubleLinkedListTest {
 
   @Test
   public void find() {
+    DoubleLinkedList<Integer> linkedList = new DoubleLinkedList<>();
+    linkedList.prepend(1);
+    linkedList.prepend(2);
+    linkedList.prepend(3);
+    DoubleLinkedList<Integer>.Link<Integer> foundLink = linkedList.find(3);
+    assertTrue("It returns the same value", foundLink.data.equals(3));
+    assertNull(linkedList.find(5));
   }
 
   @Test
   public void isEmpty() {
+    DoubleLinkedList<Integer> linkedList = new DoubleLinkedList<>();
+    assertTrue("When there are no element it returns true", linkedList.isEmpty());
+    linkedList.prepend(1);
+    assertFalse("When there are element it returns false", linkedList.isEmpty());
   }
 }
