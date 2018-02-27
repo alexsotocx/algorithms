@@ -1,7 +1,8 @@
 package datastructures;
+
 import java.util.Iterator;
 
-public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
+public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link> {
   private Link<T> first;
   private Link<T> last;
   private int size = 0;
@@ -34,7 +35,7 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
 
   public Link<T> find(T data) {
     for (Link<T> link : this) {
-      if (link.data.equals(data)){
+      if (link.data.equals(data)) {
         return link;
       }
     }
@@ -42,55 +43,74 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
   }
 
   public Link<T> delete(Link<T> linkToDelete) {
-    if(linkToDelete == null) return null;
-    if(linkToDelete.prev == null) deleteFirst();
+    if (linkToDelete == null) return null;
+    if (linkToDelete.prev == null) deleteFirst();
     else if (linkToDelete.next == null) deleteLast();
     else {
       linkToDelete.next.prev = linkToDelete.prev;
       linkToDelete.prev.next = linkToDelete.next;
     }
 
-    this.size--;
+    size--;
     return linkToDelete;
   }
 
   public Link<T> deleteFirst() {
     Link<T> temp = this.first;
-    this.first.next.prev = null;
-    this.first = this.first.next;
+    first.next.prev = null;
+    first = first.next;
     return temp;
   }
 
   public Link<T> deleteLast() {
-    Link<T> temp = this.last;
-    this.last.prev.next = null;
-    this.last = this.last.prev;
+    Link<T> temp = last;
+    last.prev.next = null;
+    last = last.prev;
     return temp;
   }
 
   public Link<T> getFirst() {
-    return this.first;
+    return first;
   }
 
   public Link<T> getLast() {
-    return this.last;
+    return last;
   }
 
   public boolean isEmpty() {
     return size == 0;
   }
 
+  public Link<T> insertAfter(Link<T> link, T data) {
+    Link<T> newLink = new Link<>(data);
+    if (link.next == null) newLink = append(data);
+    else {
+      link.next.prev = newLink;
+      newLink.next = link.next;
+      newLink.prev = link;
+      link.next = newLink;
+      size++;
+    }
+    return newLink;
+  }
+
   @Override
   public Iterator<Link> iterator() {
-    return new LinkIterator(first);
+    return new LinkIterator(first, false);
   }
+
+  public Iterator<Link> reversedIterator() {
+    return new LinkIterator(last, true);
+  }
+
 
   class LinkIterator implements Iterator<Link> {
     private Link<T> current;
-    private boolean isFirst = true;
+    private boolean reversed;
 
-    public LinkIterator(Link<T> link) {
-      this.current = first;
+    public LinkIterator(Link<T> link, boolean reversed) {
+      current = link;
+      this.reversed = reversed;
     }
 
     @Override
@@ -101,13 +121,14 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link>{
     @Override
     public Link<T> next() {
       Link<T> temp = current;
-      if (isFirst) {
-        isFirst = false;
-        current = current.next;
-        return temp;
-      }
-      current = current.next;
+      current = nextLink(current);
       return temp;
+    }
+
+
+    private Link<T> nextLink(Link<T> link) {
+      if (reversed) return link.prev;
+      return link.next;
     }
   }
 
