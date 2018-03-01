@@ -94,6 +94,19 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList.Link> {
     return newLink;
   }
 
+  public Link<T> inserBefore(Link<T> link, T data) {
+    Link<T> newLink = new Link<>(data);
+    if (link.prev == null) newLink = prepend(data);
+    else {
+      link.prev.next = newLink;
+      newLink.prev = link.prev;
+      newLink.next = link;
+      link.prev = newLink;
+      size++;
+    }
+    return newLink;
+  }
+
   @Override
   public Iterator<Link> iterator() {
     return new LinkIterator(first, false);

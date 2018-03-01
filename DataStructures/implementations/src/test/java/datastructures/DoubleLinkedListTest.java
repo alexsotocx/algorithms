@@ -12,10 +12,7 @@ public class DoubleLinkedListTest {
     linkedList.append(1);
     linkedList.append(2);
     linkedList.append(3);
-    int testArray[] = {1, 2, 3};
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : testArray)
-      assertEquals(j, it.next().data);
+    assertFullList(linkedList, new int[]{1, 2, 3});
   }
 
   @Test
@@ -24,12 +21,7 @@ public class DoubleLinkedListTest {
     linkedList.prepend(1);
     linkedList.prepend(2);
     linkedList.prepend(3);
-    int testArray[] = {3, 2, 1};
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : testArray)
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{3, 2, 1});
   }
 
   @Test
@@ -59,11 +51,7 @@ public class DoubleLinkedListTest {
     linkedList.append(3);
 
     assertTrue("Returns the first element", linkedList.delete(linkedList.getFirst()).data.equals(1));
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : new int[]{2, 3})
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{2, 3});
   }
 
   @Test
@@ -74,11 +62,7 @@ public class DoubleLinkedListTest {
     linkedList.append(3);
 
     assertTrue("Returns the last element", linkedList.delete(linkedList.getLast()).data.equals(3));
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : new int[]{1, 2})
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{1, 2});
   }
 
   @Test
@@ -89,11 +73,7 @@ public class DoubleLinkedListTest {
     linkedList.append(3);
 
     assertTrue("Returns the last element", linkedList.delete(link).data.equals(2));
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : new int[]{1, 3})
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{1, 3});
   }
 
   @Test
@@ -105,11 +85,7 @@ public class DoubleLinkedListTest {
 
     linkedList.insertAfter(link, 4);
 
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : new int[]{1, 2, 3, 4})
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{1, 2, 3, 4});
   }
 
   @Test
@@ -121,11 +97,42 @@ public class DoubleLinkedListTest {
 
     linkedList.insertAfter(link, 4);
 
-    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) linkedList.iterator();
-    for (int j : new int[]{1, 2, 4, 3})
-      assertEquals(j, it.next().data);
-
-    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFullList(linkedList, new int[]{1, 2, 4, 3});
   }
 
+  @Test
+  public void insertBeforeFirst() {
+    DoubleLinkedList<Integer> linkedList = new DoubleLinkedList<>();
+    DoubleLinkedList<Integer>.Link<Integer> link = linkedList.append(1);
+    linkedList.append(2);
+    linkedList.append(3);
+
+    linkedList.inserBefore(link, 4);
+
+    assertFullList(linkedList, new int[]{4, 1, 2, 3});
+  }
+
+  @Test
+  public void insertBeforeAtMiddle() {
+    DoubleLinkedList<Integer> linkedList = new DoubleLinkedList<>();
+    linkedList.append(1);
+    linkedList.append(2);
+    DoubleLinkedList<Integer>.Link<Integer> link = linkedList.append(3);
+
+    linkedList.inserBefore(link, 4);
+
+    assertFullList(linkedList, new int[]{1, 2, 4, 3});
+  }
+
+
+  private void assertFullList(DoubleLinkedList<Integer> doubleLinkedList, int[] toCompare) {
+    DoubleLinkedList.LinkIterator it = (DoubleLinkedList.LinkIterator) doubleLinkedList.iterator();
+    DoubleLinkedList.LinkIterator rit = (DoubleLinkedList.LinkIterator) doubleLinkedList.reversedIterator();
+    for (int i = 0, j = toCompare.length - 1; i < toCompare.length; i++, j--) {
+      assertEquals(toCompare[i], it.next().data);
+      assertEquals(toCompare[j], rit.next().data);
+    }
+    assertFalse("It has no more elements to loop", it.hasNext());
+    assertFalse("It has no more elements to loop", rit.hasNext());
+  }
 }
