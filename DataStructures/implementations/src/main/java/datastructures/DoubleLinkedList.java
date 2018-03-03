@@ -49,23 +49,27 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList<T>.Link<T>
     else {
       linkToDelete.next.prev = linkToDelete.prev;
       linkToDelete.prev.next = linkToDelete.next;
+      size--;
     }
 
-    size--;
     return linkToDelete;
   }
 
   public Link<T> deleteFirst() {
     Link<T> temp = this.first;
-    first.next.prev = null;
+    if (first.next != null)
+      first.next.prev = null;
     first = first.next;
+    size--;
     return temp;
   }
 
   public Link<T> deleteLast() {
     Link<T> temp = last;
-    last.prev.next = null;
+    if (last.prev != null)
+      last.prev.next = null;
     last = last.prev;
+    size--;
     return temp;
   }
 
