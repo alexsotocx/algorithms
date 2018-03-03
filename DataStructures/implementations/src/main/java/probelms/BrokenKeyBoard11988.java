@@ -1,8 +1,12 @@
-package datastructures;
+package probelms;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import java.util.Iterator;
 
-public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList<T>.Link<T>> {
+class DoubleLinkedList<T> implements Iterable<DoubleLinkedList<T>.Link<T>> {
   private Link<T> first;
   private Link<T> last;
   private int size = 0;
@@ -152,6 +156,41 @@ public class DoubleLinkedList<T> implements Iterable<DoubleLinkedList<T>.Link<T>
 
     public Link(T data) {
       this.data = data;
+    }
+  }
+}
+
+
+class Main {
+
+  public static void main(String args[]) {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    String line;
+    StringBuilder output = new StringBuilder();
+    try {
+      while ((line = in.readLine()) != null) {
+        DoubleLinkedList<Character> text = new DoubleLinkedList<>();
+        boolean writingAtStart = false;
+        DoubleLinkedList<Character>.Link<Character> link = text.getFirst();
+        char[] input = line.toCharArray();
+        for (char c : input) {
+          if(c == '[') writingAtStart = true;
+          else if (c == ']') {
+            writingAtStart = false;
+            link = text.getLast();
+          } else {
+            if(writingAtStart) link = text.prepend(c);
+            else if (link == null) link = text.append(c);
+            else link = text.insertAfter(link, c);
+            writingAtStart = false;
+          }
+        }
+        for (DoubleLinkedList<Character>.Link<Character> aText : text) output.append(aText.data);
+        output.append('\n');
+      }
+      System.out.print(output);
+    } catch (IOException e) {
+      //e.printStackTrace();
     }
   }
 }
