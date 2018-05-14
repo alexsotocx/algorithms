@@ -1,4 +1,4 @@
-package doubleLinkedList
+package doublelinkedlist
 
 type node struct {
 	Prev *node
@@ -43,10 +43,16 @@ func (list *DoubleLinkedList) PushHead(data interface{}) int {
 	return list.size
 }
 
-func (list DoubleLinkedList) chan 
-
 func (list DoubleLinkedList) Size() int {
 	return list.size
+}
+
+func (list DoubleLinkedList) First() *node {
+	return list.head
+}
+
+func (list DoubleLinkedList) Last() *node {
+	return list.tail
 }
 
 func (list DoubleLinkedList) IsEmpty() bool {
