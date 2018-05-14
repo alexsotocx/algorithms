@@ -1,54 +1,68 @@
-package test
+package double_linked_list
 
 import (
   "testing"
-  "../data/structures/doublelinkedlist"
+  "../../data/structures"
 )
 
 func TestPushHead(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   list.PushHead(3)
   list.PushHead(4)
   list.PushHead(5)
 
+  if list.Size() != 3 {
+    t.Error("Size is expected to be 3")
+  }
+
   expectList(&list, []int{5, 4, 3}, t)
 }
 
-
 func TestPushBack(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
+
+  if list.Size() != 3 {
+    t.Error("Size is expected to be 3")
+  }
 
   expectList(&list, []int{3, 4, 5}, t)
 }
 
 func TestDeleteTail(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
 
   list.DeleteTail()
 
+  if list.Size() != 2 {
+    t.Error("Size is expected to be 2")
+  }
+
   expectList(&list, []int{3, 4}, t)
 }
 
 func TestDeleteHead(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
 
   list.DeleteHead()
 
+  if list.Size() != 2 {
+    t.Error("Size is expected to be 2")
+  }
 
   expectList(&list, []int{4, 5}, t)
 }
 
 func TestDeleteHeadWithEmptyList(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   _, err := list.DeleteHead()
 
   if err == nil {
@@ -57,7 +71,7 @@ func TestDeleteHeadWithEmptyList(t *testing.T) {
 }
 
 func TestDeleteTailWithEmptyList(t *testing.T) {
-  list := doublelinkedlist.DoubleLinkedList{}
+  list := structures.DoubleLinkedList{}
   _, err := list.DeleteTail()
 
   if err == nil {
@@ -66,16 +80,16 @@ func TestDeleteTailWithEmptyList(t *testing.T) {
 }
 
 
-func expectList(currentList *doublelinkedlist.DoubleLinkedList, expected []int, t *testing.T) {
-  it := currentList.First()
+func expectList(currentList *structures.DoubleLinkedList, expected []int, t *testing.T) {
+  it := currentList.Iterator()
   for _, value := range expected {
-    if value != it.Data {
-      t.Errorf("Expected %d, got  %d\n", value, it.Data)
+    data, _ := it.Next()
+    if value != data {
+      t.Errorf("Expected %d, got  %d\n", value, data)
     }
-    it = it.Next
   }
 
-  if it != nil {
-    t.Errorf("Expected iterator to be at the end of the list")
+  if _, err := it.Next(); err == nil {
+    t.Error("There should not be more elements")
   }
 }

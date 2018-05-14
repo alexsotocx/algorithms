@@ -1,4 +1,4 @@
-package doublelinkedlist
+package structures
 
 import "errors"
 
@@ -14,6 +14,35 @@ type DoubleLinkedList struct {
 	tail *node
 }
 
+type iterator struct {
+  current *node
+}
+
+type reverseIterator struct {
+  current *node
+}
+
+type IteratorInterface interface {
+  Next() (interface{}, error)
+}
+
+func (it *iterator) Next() (interface{}, error) {
+  if it.current == nil {
+    return nil, errors.New("End of the list")
+  }
+  data := it.current.Data
+  it.current = it.current.Next
+  return data, nil
+}
+
+func (it *reverseIterator) Next() (interface{}, error) {
+  if it.current == nil {
+    return nil, errors.New("End of the list")
+  }
+  data := it.current.Data
+  it.current = it.current.Prev
+  return data, nil
+}
 
 func (list *DoubleLinkedList) PushBack(data interface{}) (bool, error) {
 	newNode := new(node)
@@ -45,10 +74,11 @@ func (list *DoubleLinkedList) PushHead(data interface{}) (bool, error) {
 	return true, nil
 }
 
-func (list *DoubleLinkedList) DeleteHead() (bool, error) {
+func (list *DoubleLinkedList) DeleteHead() (interface{}, error) {
 	if list.IsEmpty() {
-		return false, errors.New("List is empty, can't delete")
+		return nil, errors.New("List is empty, can't delete")
 	} else {
+	  data := list.head.Data
 		if list.Size() == 1 {
 			list.head = nil
 			list.tail = nil
@@ -57,7 +87,7 @@ func (list *DoubleLinkedList) DeleteHead() (bool, error) {
 			list.head.Prev = nil
 		}
 		list.size -= 1
-		return true, nil
+		return data, nil
 	}
 }
 
@@ -81,12 +111,20 @@ func (list DoubleLinkedList) Size() int {
 	return list.size
 }
 
-func (list DoubleLinkedList) First() *node {
-	return list.head
+func (list DoubleLinkedList) First() interface{} {
+	return list.head.Data
 }
 
-func (list DoubleLinkedList) Last() *node {
-	return list.tail
+func (list DoubleLinkedList) Last() interface{} {
+	return list.tail.Data
+}
+
+func (list DoubleLinkedList) Iterator() IteratorInterface {
+  return &iterator{current: list.head}
+}
+
+func (list DoubleLinkedList) ReverseIterator() IteratorInterface {
+  return &reverseIterator{current: list.tail}
 }
 
 func (list DoubleLinkedList) IsEmpty() bool {
