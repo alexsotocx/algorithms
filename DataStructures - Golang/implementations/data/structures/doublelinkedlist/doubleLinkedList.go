@@ -1,5 +1,7 @@
 package doublelinkedlist
 
+import "errors"
+
 type node struct {
 	Prev *node
 	Next *node
@@ -13,7 +15,7 @@ type DoubleLinkedList struct {
 }
 
 
-func (list *DoubleLinkedList) PushBack(data interface{}) int {
+func (list *DoubleLinkedList) PushBack(data interface{}) (bool, error) {
 	newNode := new(node)
 	newNode.Data = data
 	if list.IsEmpty() {
@@ -25,10 +27,10 @@ func (list *DoubleLinkedList) PushBack(data interface{}) int {
 		list.tail = newNode
 	}
 	list.size += 1
-	return list.size
+	return true, nil
 }
 
-func (list *DoubleLinkedList) PushHead(data interface{}) int {
+func (list *DoubleLinkedList) PushHead(data interface{}) (bool, error) {
 	newNode := new(node)
 	newNode.Data = data
 	if list.IsEmpty() {
@@ -40,7 +42,39 @@ func (list *DoubleLinkedList) PushHead(data interface{}) int {
 		list.head = newNode
 	}
 	list.size += 1
-	return list.size
+	return true, nil
+}
+
+func (list *DoubleLinkedList) DeleteHead() (bool, error) {
+	if list.IsEmpty() {
+		return false, errors.New("List is empty, can't delete")
+	} else {
+		if list.Size() == 1 {
+			list.head = nil
+			list.tail = nil
+		} else {
+			list.head = list.head.Next
+			list.head.Prev = nil
+		}
+		list.size -= 1
+		return true, nil
+	}
+}
+
+func (list *DoubleLinkedList) DeleteTail() (bool, error) {
+	if list.IsEmpty() {
+		return false, errors.New("List is empty, can't delete")
+	} else {
+		if list.Size() == 1 {
+			list.head = nil
+			list.tail = nil
+		} else {
+			list.tail = list.tail.Prev
+			list.tail.Next = nil
+		}
+		list.size -= 1
+		return true, nil
+	}
 }
 
 func (list DoubleLinkedList) Size() int {
