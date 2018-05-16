@@ -1,4 +1,4 @@
-package structures
+package linked_list
 
 type Stack interface {
   PushHead(data interface{}) (bool, error)

@@ -2,11 +2,11 @@ package stack
 
 import (
   "testing"
-  "../../data/structures"
+  "../../data/structures/linked_list"
 )
 
 func TestStackPush(t *testing.T) {
-  stack := structures.NewStack()
+  stack := linked_list.NewStack()
   stack.PushHead(1)
   stack.PushHead(2)
   stack.PushHead(3)
@@ -15,7 +15,7 @@ func TestStackPush(t *testing.T) {
 }
 
 func TestStackDelete(t *testing.T) {
-  stack := structures.NewStack()
+  stack := linked_list.NewStack()
   stack.PushHead(1)
   stack.PushHead(2)
   stack.PushHead(3)
@@ -29,7 +29,7 @@ func TestStackDelete(t *testing.T) {
   expectedList(stack.Iterator(), []int{2, 1}, t)
 }
 
-func expectedList(it structures.IteratorInterface, expected []int, t *testing.T) {
+func expectedList(it linked_list.IteratorInterface, expected []int, t *testing.T) {
   for _, value := range expected {
     data, _ := it.Next()
     if value != data {

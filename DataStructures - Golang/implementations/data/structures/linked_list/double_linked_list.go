@@ -1,4 +1,4 @@
-package structures
+package linked_list
 
 import "errors"
 
@@ -9,7 +9,7 @@ type node struct {
 }
 
 type DoubleLinkedList struct {
-	size int
+	size uint
 	head *node
 	tail *node
 }
@@ -107,7 +107,7 @@ func (list *DoubleLinkedList) DeleteTail() (bool, error) {
 	}
 }
 
-func (list DoubleLinkedList) Size() int {
+func (list DoubleLinkedList) Size() uint {
 	return list.size
 }
 

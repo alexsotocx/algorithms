@@ -1,4 +1,4 @@
-package structures
+package linked_list
 
 type Queue interface {
   PushBack(data interface{}) (bool, error)

@@ -2,11 +2,11 @@ package double_linked_list
 
 import (
   "testing"
-  "../../data/structures"
+  "../../data/structures/linked_list"
 )
 
 func TestPushHead(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   list.PushHead(3)
   list.PushHead(4)
   list.PushHead(5)
@@ -19,7 +19,7 @@ func TestPushHead(t *testing.T) {
 }
 
 func TestPushBack(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
@@ -32,7 +32,7 @@ func TestPushBack(t *testing.T) {
 }
 
 func TestDeleteTail(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
@@ -47,7 +47,7 @@ func TestDeleteTail(t *testing.T) {
 }
 
 func TestDeleteHead(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   list.PushBack(3)
   list.PushBack(4)
   list.PushBack(5)
@@ -62,7 +62,7 @@ func TestDeleteHead(t *testing.T) {
 }
 
 func TestDeleteHeadWithEmptyList(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   _, err := list.DeleteHead()
 
   if err == nil {
@@ -71,7 +71,7 @@ func TestDeleteHeadWithEmptyList(t *testing.T) {
 }
 
 func TestDeleteTailWithEmptyList(t *testing.T) {
-  list := structures.DoubleLinkedList{}
+  list := linked_list.DoubleLinkedList{}
   _, err := list.DeleteTail()
 
   if err == nil {
@@ -80,7 +80,7 @@ func TestDeleteTailWithEmptyList(t *testing.T) {
 }
 
 
-func expectList(currentList *structures.DoubleLinkedList, expected []int, t *testing.T) {
+func expectList(currentList *linked_list.DoubleLinkedList, expected []int, t *testing.T) {
   it := currentList.Iterator()
   for _, value := range expected {
     data, _ := it.Next()

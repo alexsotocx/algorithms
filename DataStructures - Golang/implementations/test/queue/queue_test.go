@@ -2,11 +2,11 @@ package queue
 
 import (
   "testing"
-  "../../data/structures"
+  "../../data/structures/linked_list"
 )
 
 func TestQueuePushBack(t *testing.T) {
-  queue := structures.NewQueue()
+  queue := linked_list.NewQueue()
   queue.PushBack(1)
   queue.PushBack(2)
   queue.PushBack(3)
@@ -15,7 +15,7 @@ func TestQueuePushBack(t *testing.T) {
 }
 
 func TestQueueDelete(t *testing.T) {
-  queue := structures.NewQueue()
+  queue := linked_list.NewQueue()
   queue.PushBack(1)
   queue.PushBack(2)
   queue.PushBack(3)
@@ -29,7 +29,7 @@ func TestQueueDelete(t *testing.T) {
   expectedList(queue.Iterator(), []int{2, 3}, t)
 }
 
-func expectedList(it structures.IteratorInterface, expected []int, t *testing.T) {
+func expectedList(it linked_list.IteratorInterface, expected []int, t *testing.T) {
   for _, value := range expected {
     data, _ := it.Next()
     if value != data {
