@@ -19,7 +19,7 @@ func TestInsert(t *testing.T) {
 
   expectInOrder(&tree, []interface{}{4, 2 , 1, 3, 5}, t)
   expectPreOrder(&tree, []interface{}{1, 2 , 4, 3, 5}, t)
-  expectPostOrder(&tree, []interface{}{4, 2 , 3, 5, 1}, t)
+  expectPostOrder(&tree, []interface{}{4, 2 , 5, 3, 1}, t)
 }
 
 func expectInOrder(tree *trees.BinaryTree, expected []interface{}, t *testing.T){

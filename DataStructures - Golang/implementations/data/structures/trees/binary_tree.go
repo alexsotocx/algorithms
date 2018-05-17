@@ -1,5 +1,6 @@
 package trees
 
+
 type node struct {
   LeftChildren *node
   RightChildren *node
@@ -23,7 +24,7 @@ func (tree *BinaryTree) Insert(data interface{})  {
   } else {
     node := newNode(data)
     parentNode := tree.root
-    for i := uint(1); i <= tree.size; i <<= 2 {
+    for i := uint(1); i <= tree.size; i <<= 1 {
       if (tree.size & i) != 0 {
         if parentNode.LeftChildren == nil {
           parentNode.LeftChildren = node
@@ -61,8 +62,8 @@ func (tree BinaryTree) PreOrder(eachFunction func(interface{})) {
 func (tree BinaryTree) preOrder(current *node, eachFunction func(interface{})) {
   if current != nil {
     eachFunction(current.Data)
-    tree.inOrder(current.LeftChildren, eachFunction)
-    tree.inOrder(current.RightChildren, eachFunction)
+    tree.preOrder(current.LeftChildren, eachFunction)
+    tree.preOrder(current.RightChildren, eachFunction)
   }
 }
 
@@ -72,8 +73,8 @@ func (tree BinaryTree) PosOrder(eachFunction func(interface{})) {
 
 func (tree BinaryTree) posOrder(current *node, eachFunction func(interface{})) {
   if current != nil {
-    tree.inOrder(current.LeftChildren, eachFunction)
-    tree.inOrder(current.RightChildren, eachFunction)
+    tree.posOrder(current.LeftChildren, eachFunction)
+    tree.posOrder(current.RightChildren, eachFunction)
     eachFunction(current.Data)
   }
 }
