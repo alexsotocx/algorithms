@@ -23,6 +23,23 @@ func TestInsert(t *testing.T) {
 	expectPostOrder(&tree, []interface{}{4, 2, 5, 3, 1}, t)
 }
 
+func TestFind(t *testing.T) {
+	tree := trees.BinaryTree{}
+	tree.Insert(1)
+	tree.Insert(2)
+	tree.Insert(3)
+	tree.Insert(4)
+	tree.Insert(5)
+
+	if !tree.Find(5) {
+		t.Error("It should find the element 5")
+	}
+
+	if tree.Find(6) {
+		t.Error("It should not find the element 6")
+	}
+}
+
 func expectInOrder(tree *trees.BinaryTree, expected []interface{}, t *testing.T) {
 	i := 0
 	tree.InOrder(func(data interface{}) {
