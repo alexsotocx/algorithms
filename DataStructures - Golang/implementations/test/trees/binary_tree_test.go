@@ -31,11 +31,11 @@ func TestFind(t *testing.T) {
 	tree.Insert(4)
 	tree.Insert(5)
 
-	if !tree.Find(5) {
+	if found, _ := tree.Find(5); !found {
 		t.Error("It should find the element 5")
 	}
 
-	if tree.Find(6) {
+	if found, _ := tree.Find(6); found {
 		t.Error("It should not find the element 6")
 	}
 }
