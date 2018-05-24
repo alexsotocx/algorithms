@@ -3,7 +3,6 @@ package trees
 type node struct {
 	LeftChildren  *node
 	RightChildren *node
-	Parent        *node
 	Data          interface{}
 }
 
@@ -27,14 +26,12 @@ func (tree *BinaryTree) Insert(data interface{}) {
 		for i := uint(1); i <= tree.size; i <<= 1 {
 			if (tree.size & i) != 0 {
 				if parentNode.LeftChildren == nil {
-				  node.Parent = parentNode.LeftChildren
 					parentNode.LeftChildren = node
 					break
 				}
 				parentNode = parentNode.LeftChildren
 			} else {
 				if parentNode.RightChildren == nil {
-          node.Parent = parentNode.RightChildren
 					parentNode.RightChildren = node
 					break
 				}
@@ -45,84 +42,71 @@ func (tree *BinaryTree) Insert(data interface{}) {
 	tree.size++
 }
 
-func (tree BinaryTree) Find(data interface{}) (bool, *node)  {
-	return tree.find(data, tree.root)
+func (tree BinaryTree) Find(data interface{}) (bool, interface{})  {
+	f, _, c := tree.find(data, nil, tree.root)
+	if f { return f, c.Data }
+	return false, nil
 }
 
-func (tree BinaryTree) find(data interface{}, current *node) (bool, *node)  {
+func (tree BinaryTree) find(data interface{}, parent *node, current *node,) (bool, *node, *node)  {
   if current != nil {
     if current.Data == data {
-      return true, current
+      return true, parent, current
     }
-    if f, n := tree.find(data, current.LeftChildren); f {
-      return f, n
+    if f, p, c := tree.find(data, current, current.LeftChildren); f {
+      return f, p, c
     }
-    if f, n := tree.find(data, current.RightChildren); f {
-      return f, n
+    if f, p, c := tree.find(data, current, current.RightChildren); f {
+      return f, p, c
     }
   }
 
-  return false, nil
+  return false, nil, nil
 }
 
 func (tree *BinaryTree) Delete(data interface{}) (bool, interface{}) {
-  found, toDelete := tree.Find(data)
+  found, _, toDelete := tree.find(data, nil, tree.root)
   if found {
+    replacementParent, replacement := tree.findReplacement()
+
+    if replacementParent.LeftChildren == replacement {
+      replacementParent.LeftChildren = nil
+    } else {
+      replacementParent.RightChildren = nil
+    }
+
+    temp := toDelete.Data
+    toDelete.Data = replacement.Data
+
     tree.size -= 1
-    replacement := tree.findReplacement()
-    if replacement.Parent.LeftChildren == replacement {
-      replacement.Parent.LeftChildren = nil
-    } else {
-      replacement.Parent.RightChildren = nil
-    }
-
-    if replacement == toDelete {
-      replacement.Parent = nil
-      return true, toDelete.Data
-    }
-
-    if toDelete == toDelete.Parent.LeftChildren {
-      toDelete.Parent.LeftChildren = replacement
-    } else {
-      toDelete.Parent.RightChildren = replacement
-    }
-
-    replacement.Parent = toDelete.Parent
-    if toDelete.RightChildren != nil {
-      toDelete.RightChildren.Parent = replacement
-      replacement.RightChildren = toDelete.RightChildren
-    }
-    if toDelete.LeftChildren != nil {
-      toDelete.LeftChildren.Parent = replacement
-      replacement.LeftChildren = toDelete.LeftChildren
-    }
-    if toDelete == tree.root {
-      tree.root = replacement
-    }
-    return true, toDelete.Data
+    return true, temp
 
   }
 
   return false, nil
 }
 
-func (tree BinaryTree) findReplacement() *node {
+func (tree BinaryTree) findReplacement() (*node, *node) {
+  var parent *node
   selected := tree.root
-  for i := uint(1); i <= tree.size; i <<= 1 {
-    if selected.LeftChildren == nil && selected.RightChildren == nil {
-      return selected
-    }
-    if (tree.size & i) != 0 {
+  for i := uint(1); i < tree.size; i <<= 1 {
+    if ((tree.size - 1) & i) != 0 {
       if selected.LeftChildren != nil {
+        parent = selected
         selected = selected.LeftChildren
+      } else if selected.RightChildren == nil {
+        return parent, selected
       }
     } else {
       if selected.RightChildren != nil {
+        parent = selected
         selected = selected.RightChildren
+      } else if selected.LeftChildren == nil {
+        return parent, selected
       }
     }
   }
-  return selected
+  return parent, selected
 }
 
 func (tree BinaryTree) InOrder(eachFunction func(interface{})) {
