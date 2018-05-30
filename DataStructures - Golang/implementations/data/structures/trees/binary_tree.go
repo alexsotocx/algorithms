@@ -1,12 +1,14 @@
 package trees
 
+import "../interfaces"
+
 type node struct {
 	LeftChildren  *node
 	RightChildren *node
-	Data          interface{}
+	Data          interfaces.Comparable
 }
 
-func newNode(data interface{}) *node {
+func newNode(data interfaces.Comparable) *node {
 	node := new(node)
 	node.Data = data
 	return node
@@ -17,7 +19,7 @@ type BinaryTree struct {
 	size uint
 }
 
-func (tree *BinaryTree) Insert(data interface{}) {
+func (tree *BinaryTree) Insert(data interfaces.Comparable) {
 	if tree.IsEmpty() {
 		tree.root = newNode(data)
 	} else {
@@ -42,15 +44,15 @@ func (tree *BinaryTree) Insert(data interface{}) {
 	tree.size++
 }
 
-func (tree BinaryTree) Find(data interface{}) (bool, interface{})  {
+func (tree BinaryTree) Find(data interfaces.Comparable) (bool, interfaces.Comparable)  {
 	f, _, c := tree.find(data, nil, tree.root)
 	if f { return f, c.Data }
 	return false, nil
 }
 
-func (tree BinaryTree) find(data interface{}, parent *node, current *node,) (bool, *node, *node)  {
+func (tree BinaryTree) find(data interfaces.Comparable, parent *node, current *node,) (bool, *node, *node)  {
   if current != nil {
-    if current.Data == data {
+    if current.Data.Compare(data)  == 0 {
       return true, parent, current
     }
     if f, p, c := tree.find(data, current, current.LeftChildren); f {
@@ -64,7 +66,7 @@ func (tree BinaryTree) find(data interface{}, parent *node, current *node,) (boo
   return false, nil, nil
 }
 
-func (tree *BinaryTree) Delete(data interface{}) (bool, interface{}) {
+func (tree *BinaryTree) Delete(data interfaces.Comparable) (bool, interfaces.Comparable) {
   found, _, toDelete := tree.find(data, nil, tree.root)
   if found {
     replacementParent, replacement := tree.findReplacement()
@@ -109,11 +111,11 @@ func (tree BinaryTree) findReplacement() (*node, *node) {
   return parent, selected
 }
 
-func (tree BinaryTree) InOrder(eachFunction func(interface{})) {
+func (tree BinaryTree) InOrder(eachFunction func(interfaces.Comparable)) {
 	tree.inOrder(tree.root, eachFunction)
 }
 
-func (tree BinaryTree) inOrder(current *node, eachFunction func(interface{})) {
+func (tree BinaryTree) inOrder(current *node, eachFunction func(interfaces.Comparable)) {
 	if current != nil {
 		tree.inOrder(current.LeftChildren, eachFunction)
 		eachFunction(current.Data)
@@ -121,11 +123,11 @@ func (tree BinaryTree) inOrder(current *node, eachFunction func(interface{})) {
 	}
 }
 
-func (tree BinaryTree) PreOrder(eachFunction func(interface{})) {
+func (tree BinaryTree) PreOrder(eachFunction func(interfaces.Comparable)) {
 	tree.preOrder(tree.root, eachFunction)
 }
 
-func (tree BinaryTree) preOrder(current *node, eachFunction func(interface{})) {
+func (tree BinaryTree) preOrder(current *node, eachFunction func(interfaces.Comparable)) {
 	if current != nil {
 		eachFunction(current.Data)
 		tree.preOrder(current.LeftChildren, eachFunction)
@@ -133,11 +135,11 @@ func (tree BinaryTree) preOrder(current *node, eachFunction func(interface{})) {
 	}
 }
 
-func (tree BinaryTree) PosOrder(eachFunction func(interface{})) {
+func (tree BinaryTree) PosOrder(eachFunction func(interfaces.Comparable)) {
 	tree.posOrder(tree.root, eachFunction)
 }
 
-func (tree BinaryTree) posOrder(current *node, eachFunction func(interface{})) {
+func (tree BinaryTree) posOrder(current *node, eachFunction func(interfaces.Comparable)) {
 	if current != nil {
 		tree.posOrder(current.LeftChildren, eachFunction)
 		tree.posOrder(current.RightChildren, eachFunction)
