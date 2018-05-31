@@ -13,7 +13,7 @@ func (tree *BinarySearchTree) Insert(data interfaces.Comparable) {
  } else {
    parent := tree.root
    for {
-     if data.Compare(parent.Data) == 1  {
+     if parent.Data.Compare(data) == 1  {
        if parent.RightChildren == nil {
          parent.RightChildren = newNode(data)
          break
@@ -28,4 +28,19 @@ func (tree *BinarySearchTree) Insert(data interfaces.Comparable) {
      }
    }
  }
+}
+
+func (tree *BinarySearchTree) Find(data interfaces.Comparable) (bool, interfaces.Comparable) {
+  current := tree.root
+  for current != nil {
+    valCom := current.Data.Compare(data)
+    if valCom == 0 {
+      return true, current.Data
+    } else if valCom == 1 {
+      current = current.RightChildren
+    } else {
+      current = current.LeftChildren
+    }
+  }
+  return false, nil
 }
