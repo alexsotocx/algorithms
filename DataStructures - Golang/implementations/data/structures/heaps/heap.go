@@ -18,32 +18,25 @@ func (heap *PriorityQueue) Pop() interfaces.Comparable {
   var data interfaces.Comparable
   data, heap.nodes[0] = heap.nodes[0], heap.nodes[len(heap.nodes) - 1]
   heap.nodes = heap.nodes[:len(heap.nodes) - 1]
-  shiftDown(0, heap.nodes)
+  shiftDown(0, heap.nodes, len(heap.nodes))
   heap.size--
   return data
 }
 
-func shiftDown(i int, nodes []interfaces.Comparable) {
-  n := len(nodes)
-  for leftChild(i) < n {
+func shiftDown(i int, nodes []interfaces.Comparable, until int) {
+  for leftChild(i) < until {
     bigger, left := leftChild(i), leftChild(i)
     right := rightChild(i)
-    if right < n {
+    if right < until {
       if nodes[left].Compare(nodes[right]) == -1 {
         bigger = right
       }
-      if nodes[i].Compare(nodes[bigger]) == 1 {
-        break
-      }
-      nodes[i], nodes[bigger] = nodes[bigger], nodes[i]
-      i = bigger
-    } else {
-      if nodes[i].Compare(nodes[left]) == 1 {
-        break
-      }
-      nodes[i], nodes[left] = nodes[left], nodes[i]
-      i = left
     }
+    if nodes[i].Compare(nodes[bigger]) == 1 {
+      break
+    }
+    nodes[i], nodes[bigger] = nodes[bigger], nodes[i]
+    i = bigger
   }
 }
 
@@ -59,7 +52,7 @@ func parent(i int) int {
 }
 
 func leftChild(i int) int {
-  return 2*(i + 1) - 1
+  return 2* i + 1
 }
 
 func rightChild(i int) int {
