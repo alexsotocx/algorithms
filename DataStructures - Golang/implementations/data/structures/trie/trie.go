@@ -1,16 +1,21 @@
 package trie
 
-import "strings"
+import (
+	"strings"
+)
 
 type node struct {
-	connections [26]*node
-	word        bool
-	suffix      bool
+	connections    [26]*node
+	word           bool
+	suffix         int
+	numConnections int
 }
 
 func (node *node) setVal(i int, j int, n int) {
-	node.word = node.word || j+1 == n && i == 0
-	node.suffix = node.suffix || j+1 == n && i != 0
+	node.word = node.word || (j+1 == n && i == 0)
+	if j+1 == n && i != 0 {
+		node.suffix = i
+	}
 }
 
 type Trie struct {
@@ -28,6 +33,7 @@ func (trie *Trie) Insert(data string) {
 		for j := i; j < n; j++ {
 			norma := data[j] - 'A'
 			if current.connections[norma] == nil {
+				current.numConnections++
 				current.connections[norma] = &node{}
 			}
 			current.connections[norma].setVal(i, j, n)
@@ -36,7 +42,7 @@ func (trie *Trie) Insert(data string) {
 	}
 }
 
-func (trie Trie) Find(data string) (bool, bool) {
+func (trie Trie) Find(data string) bool {
 	current := trie.root
 	data = strings.ToUpper(data)
 	for _, c := range data {
@@ -45,9 +51,41 @@ func (trie Trie) Find(data string) (bool, bool) {
 			current = current.connections[norma]
 		} else {
 			current = nil
-			return false, false
+			return false
 		}
 	}
 
-	return current.word, current.suffix
+	return current.word
+}
+
+func (trie Trie) FindSuffix(data string) int {
+	current := trie.root
+	data = strings.ToUpper(data)
+	for _, c := range data {
+		norma := c - 'A'
+		if current.connections[norma] != nil {
+			current = current.connections[norma]
+		} else {
+			current = nil
+			return -1
+		}
+	}
+
+	return current.suffix
+}
+
+func (trie Trie) LRS(data string) int {
+	current := trie.root
+	data = strings.ToUpper(data)
+	for _, c := range data {
+		norma := c - 'A'
+		if current.connections[norma] != nil {
+			current = current.connections[norma]
+		} else {
+			current = nil
+			return -1
+		}
+	}
+
+	return current.suffix
 }
