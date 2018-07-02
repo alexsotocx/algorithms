@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/alexsotocx/algorithms/go/data_structures/heaps"
-	"github.com/alexsotocx/algorithms/go/data_structures/interfaces"
+	"github.com/alexsotocx/algorithms/go/interfaces"
 )
 
 type Integer struct {

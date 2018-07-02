@@ -1,8 +1,8 @@
 package binary_tree
 
 import (
-	"github.com/alexsotocx/algorithms/go/data_structures/interfaces"
 	"github.com/alexsotocx/algorithms/go/data_structures/trees/node"
+	"github.com/alexsotocx/algorithms/go/interfaces"
 )
 
 type BinaryTree struct {

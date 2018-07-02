@@ -3,8 +3,8 @@ package binary_tree_test
 import (
 	"testing"
 
-	"github.com/alexsotocx/algorithms/go/data_structures/interfaces"
 	"github.com/alexsotocx/algorithms/go/data_structures/trees/binary_tree"
+	"github.com/alexsotocx/algorithms/go/interfaces"
 )
 
 type Integer struct {

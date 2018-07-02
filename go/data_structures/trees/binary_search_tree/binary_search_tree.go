@@ -1,9 +1,9 @@
 package binary_search_tree
 
 import (
-	"github.com/alexsotocx/algorithms/go/data_structures/interfaces"
 	"github.com/alexsotocx/algorithms/go/data_structures/trees/binary_tree"
 	"github.com/alexsotocx/algorithms/go/data_structures/trees/node"
+	"github.com/alexsotocx/algorithms/go/interfaces"
 )
 
 type BinarySearchTree struct {

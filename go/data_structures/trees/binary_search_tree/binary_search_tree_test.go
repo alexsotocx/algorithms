@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	trees "github.com/alexsotocx/algorithms/go/data_structures/trees/binary_search_tree"
-  "github.com/alexsotocx/algorithms/go/data_structures/interfaces"
+	"github.com/alexsotocx/algorithms/go/interfaces"
 )
 
 type Integer struct {

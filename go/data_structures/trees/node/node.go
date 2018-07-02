@@ -1,6 +1,6 @@
 package node
 
-import "github.com/alexsotocx/algorithms/go/data_structures/interfaces"
+import "github.com/alexsotocx/algorithms/go/interfaces"
 
 type Node struct {
 	LeftChildren  *Node
