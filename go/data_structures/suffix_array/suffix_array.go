@@ -1,7 +1,7 @@
 package suffix_array
 
 import (
-	"sort"
+	"github.com/alexsotocx/algorithms/go/algorithms/mergesort"
 )
 
 type suffix struct {
@@ -50,7 +50,7 @@ func (s *SuffixArray) defineRanks(k int) {
 }
 
 func (s *SuffixArray) sortRanks() {
-	sort.Slice(s.suffixes, func(i, j int) bool {
+	mergesort.Sort(s.suffixes, func(i, j int) bool {
 		if s.suffixes[i].ri == s.suffixes[j].ri {
 			return s.suffixes[i].rj < s.suffixes[j].rj
 		}

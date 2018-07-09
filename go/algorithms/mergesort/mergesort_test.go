@@ -3,6 +3,8 @@ package mergesort_test
 import (
 	"testing"
 
+	"fmt"
+
 	"github.com/alexsotocx/algorithms/go/algorithms/mergesort"
 	"github.com/alexsotocx/algorithms/go/interfaces"
 )
@@ -27,10 +29,13 @@ func (i Integer) Compare(a interfaces.Comparable) int8 {
 
 func TestSort(t *testing.T) {
 	out := []int{2, 2, 2, 3, 3, 5}
-	input := []interfaces.Comparable{Integer{5}, Integer{2}, Integer{3}, Integer{2}, Integer{3}, Integer{2}}
-	mergesort.Sort(input)
+	input := []int{5, 3, 3, 2, 2, 2}
+	mergesort.Sort(input, func(i, j int) bool {
+		return input[i] < input[j]
+	})
+	fmt.Println(input)
 	for i, v := range input {
-		if v.Value().(int) != out[i] {
+		if v != out[i] {
 			t.Fatalf("Expected %d, got %d", out[i], v)
 		}
 	}
