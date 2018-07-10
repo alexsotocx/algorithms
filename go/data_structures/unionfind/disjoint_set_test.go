@@ -15,11 +15,11 @@ func TestSameSet(t *testing.T) {
 	djset.Join(9, 3)
 
 	testCases := []*map[string]interface{}{
-		&map[string]interface{}{"a": 0, "b": 1, "result": true},
-		&map[string]interface{}{"a": 0, "b": 2, "result": true},
-		&map[string]interface{}{"a": 0, "b": 3, "result": true},
-		&map[string]interface{}{"a": 0, "b": 4, "result": false},
-		&map[string]interface{}{"a": 0, "b": 9, "result": true},
+		{"a": 0, "b": 1, "result": true},
+		{"a": 0, "b": 2, "result": true},
+		{"a": 0, "b": 3, "result": true},
+		{"a": 0, "b": 4, "result": false},
+		{"a": 0, "b": 9, "result": true},
 	}
 
 	for _, tc := range testCases {

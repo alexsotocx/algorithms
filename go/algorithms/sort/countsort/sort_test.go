@@ -1,9 +1,9 @@
-package countsort_test
+package countsort
 
 import (
 	"testing"
 
-	"github.com/alexsotocx/algorithms/go/algorithms/countsort"
+	"github.com/alexsotocx/algorithms/go/algorithms/sort/countsort"
 )
 
 func TestSort(t *testing.T) {
