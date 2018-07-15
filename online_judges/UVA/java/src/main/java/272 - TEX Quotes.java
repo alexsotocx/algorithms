@@ -10,7 +10,6 @@ class TexQuotes272 {
     boolean left = true;
     while ((line = br.readLine()) != null) {
       String[] split = line.split("((?<=\")|(?=\"))", -1);
-      //System.out.println(Arrays.toString(split));
       for (String s : split) {
         if (s.equals("")) continue;
         if (s.equals("\"")) {
