@@ -8,15 +8,16 @@ type node struct {
 }
 
 type Graph struct {
-	adjacencyList []*node
+	adjacencyList [][]*node
 }
 
-func New() *Graph {
+func New(n int) *Graph {
 	return &Graph{
-		adjacencyList: make([]*node, 0),
+		adjacencyList: make([][]*node, n),
 	}
 }
 
-func (graph *Graph) AddNode(vertex, weight int) {
-	graph.adjacencyList = append(graph.adjacencyList, &node{vertex: vertex, weight: weight})
+func (graph *Graph) AddNode(nd, vertex, weight int) {
+	adj := graph.adjacencyList[nd]
+	adj = append(adj, &node{vertex: vertex, weight: weight})
 }

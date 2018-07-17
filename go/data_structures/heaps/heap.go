@@ -4,7 +4,7 @@ import "github.com/alexsotocx/algorithms/go/interfaces"
 
 type PriorityQueue struct {
 	nodes []interfaces.Comparable
-	size  uint
+	size  int
 }
 
 func (heap *PriorityQueue) Insert(data interfaces.Comparable) {
@@ -21,6 +21,14 @@ func (heap *PriorityQueue) Pop() interfaces.Comparable {
 	shiftDown(0, heap.nodes, len(heap.nodes))
 	heap.size--
 	return data
+}
+
+func (heap *PriorityQueue) Size() int {
+	return heap.size
+}
+
+func (heap *PriorityQueue) IsEmpty() bool {
+	return heap.size == 0
 }
 
 func shiftDown(i int, nodes []interfaces.Comparable, until int) {

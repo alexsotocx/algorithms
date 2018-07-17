@@ -7,6 +7,7 @@ type Queue interface {
 	DeleteHead() (interface{}, error)
 	First() interface{}
 	Iterator() IteratorInterface
+	IsEmpty() bool
 }
 
 func New() Queue {
