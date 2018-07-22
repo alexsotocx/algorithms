@@ -1,5 +1,8 @@
 package chapter1;
 
+/*
+ * Define if string A can be converted into string B by just one change(Edition, remove or insertion)
+ * */
 public class Exercise1_5 {
   boolean isOneWay(String a, String b) {
     if (Math.abs(a.length() - b.length()) > 1) return false;
