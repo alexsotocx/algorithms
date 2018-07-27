@@ -11,4 +11,9 @@ public class LNode {
   public LNode(int value) {
     this.value = value;
   }
+
+  public LNode(int value, LNode next) {
+    this.value = value;
+    this.next = next;
+  }
 }
