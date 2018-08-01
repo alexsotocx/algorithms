@@ -4,27 +4,27 @@ import java.util.ArrayList;
 
 public class AdjacencyList {
   ArrayList<ArrayList<Integer>> connections;
-  int numberConnections;
+  int numNodes;
 
   public AdjacencyList() {
     connections = new ArrayList<>();
   }
 
-  public AdjacencyList(int numberConnections) {
-    this.numberConnections = numberConnections;
-    connections = new ArrayList<>(numberConnections);
-    for (int i = 0; i < numberConnections; i++) connections.add(i, new ArrayList<>());
+  public AdjacencyList(int numNodes) {
+    this.numNodes = numNodes;
+    connections = new ArrayList<>(numNodes);
+    for (int i = 0; i < numNodes; i++) connections.add(i, new ArrayList<>());
   }
 
   public ArrayList<Integer> getConnectionsFor(int v) {
-    if (v > numberConnections) return null;
+    if (v > numNodes) return null;
     return connections.get(v);
   }
 
   public int addNode() {
     connections.add(new ArrayList<>());
-    numberConnections++;
-    return numberConnections - 1;
+    numNodes++;
+    return numNodes - 1;
   }
 
   public void addConnection(int s, int e) {
@@ -33,6 +33,6 @@ public class AdjacencyList {
   }
 
   public int Size() {
-    return numberConnections;
+    return numNodes;
   }
 }
