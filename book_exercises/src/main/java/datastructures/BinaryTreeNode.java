@@ -1,7 +1,7 @@
 package datastructures;
 
 public class BinaryTreeNode<T> {
-  public BinaryTreeNode<T> right, left;
+  public BinaryTreeNode<T> right, left, parent;
   public T data;
   public int height = -1;
 
