@@ -26,7 +26,7 @@ public class E8_7 {
   private void generatePermutations(LinkedList<Character> qTemp) {
     if (qTemp.size() == toPermute.length()) {
       String per = createPermutation(qTemp);
-      if(alreadyAdded.add(per))
+      if (alreadyAdded.add(per))
         permutations.add(createPermutation(qTemp));
     } else {
       for (int i = 0; i < toPermute.length(); i++) {
