@@ -9,8 +9,8 @@ public class E8_3 {
       if (mid <= a[mid]) hi = mid - 1;
       else low = mid + 1;
     }
-    if(a[hi] == hi) return hi;
-    if(a[low] == low) return low;
+    if (a[hi] == hi) return hi;
+    if (a[low] == low) return low;
     return -1;
   }
 }
