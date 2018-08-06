@@ -18,22 +18,22 @@ public class E3_3<T> {
   }
 
   private void checkForIncrease() {
-    if(currentStack() == null) {
+    if (currentStack() == null) {
       stacks.add(new Stack<>());
       return;
     }
-    if(currentStack().size() >= eStackCapacity) stacks.add(new Stack<>());
+    if (currentStack().size() >= eStackCapacity) stacks.add(new Stack<>());
   }
 
   public T pop() {
-    if(currentStack() == null) return null;
-    if(currentStack().size() == 0) stacks.remove(stacks.size() - 1);
-    if(currentStack() == null) return  null;
+    if (currentStack() == null) return null;
+    if (currentStack().size() == 0) stacks.remove(stacks.size() - 1);
+    if (currentStack() == null) return null;
     return currentStack().pop();
   }
 
   private Stack<T> currentStack() {
-    if(stacks.size() == 0) return null;
+    if (stacks.size() == 0) return null;
     return stacks.get(stacks.size() - 1);
   }
 }
