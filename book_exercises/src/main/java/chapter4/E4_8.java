@@ -1,9 +1,9 @@
 package chapter4;
 
-import datastructures.BinaryTreeNode;
+import datastructures.BNode;
 
 public class E4_8 {
-  BinaryTreeNode<Integer> findCommonAncestor(BinaryTreeNode<Integer> n1, BinaryTreeNode<Integer> n2, BinaryTreeNode<Integer> root) {
+  BNode<Integer> findCommonAncestor(BNode<Integer> n1, BNode<Integer> n2, BNode<Integer> root) {
     if (n1 == root || n2 == root) return root;
     boolean n1LeftSide = find(n1, root.left);
     boolean n2LeftSide = find(n2, root.left);
@@ -11,7 +11,7 @@ public class E4_8 {
     return n1LeftSide ? findCommonAncestor(n1, n2, root.left) : findCommonAncestor(n1, n2, root.right);
   }
 
-  private boolean find(BinaryTreeNode node, BinaryTreeNode current) {
+  private boolean find(BNode node, BNode current) {
     if (current == null) return false;
     if (current == node) return true;
     return find(node, current.left) || find(node, current.right);

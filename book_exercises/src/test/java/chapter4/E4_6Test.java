@@ -1,19 +1,19 @@
 package chapter4;
 
-import datastructures.BinaryTreeNode;
+import datastructures.BNode;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class E4_6Test {
   @Test
   public void nextSucccesor() {
-    BinaryTreeNode<Integer> root = new BinaryTreeNode<>(5);
-    BinaryTreeNode<Integer> l1Left = new BinaryTreeNode<>(3);
-    BinaryTreeNode<Integer> l1right = new BinaryTreeNode<>(7);
-    BinaryTreeNode<Integer> l2lleft = new BinaryTreeNode<>(2);
-    BinaryTreeNode<Integer> l2lright = new BinaryTreeNode<>(4);
-    BinaryTreeNode<Integer> l2rleft = new BinaryTreeNode<>(6);
-    BinaryTreeNode<Integer> l2rright = new BinaryTreeNode<>(8);
+    BNode<Integer> root = new BNode<>(5);
+    BNode<Integer> l1Left = new BNode<>(3);
+    BNode<Integer> l1right = new BNode<>(7);
+    BNode<Integer> l2lleft = new BNode<>(2);
+    BNode<Integer> l2lright = new BNode<>(4);
+    BNode<Integer> l2rleft = new BNode<>(6);
+    BNode<Integer> l2rright = new BNode<>(8);
 
     root.left = l1Left;
     root.right = l1right;
