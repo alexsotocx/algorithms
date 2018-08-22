@@ -1,4 +1,4 @@
-package HackerRank.Arrays;
+package InterviewPrepartionKit.Arrays;
 
 public class TwoDArrays {
   private static int[] di = new int[]{0, 0, 0, 1, 2, 2, 2};

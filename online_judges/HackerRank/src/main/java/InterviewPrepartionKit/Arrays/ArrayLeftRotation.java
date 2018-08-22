@@ -1,4 +1,4 @@
-package HackerRank.Arrays;
+package InterviewPrepartionKit.Arrays;
 
 public class ArrayLeftRotation {
 
