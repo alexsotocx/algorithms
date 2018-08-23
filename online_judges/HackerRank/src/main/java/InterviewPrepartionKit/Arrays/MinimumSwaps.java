@@ -1,4 +1,6 @@
-class MinimumSwaps {
+package InterviewPrepartionKit.Arrays;
+
+public class MinimumSwaps {
    void swap(int[] arr, int i, int j) {
       int temp = arr[i];
       arr[i] = arr[j];
