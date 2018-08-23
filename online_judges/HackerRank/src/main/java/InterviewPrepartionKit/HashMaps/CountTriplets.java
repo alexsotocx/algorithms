@@ -1,3 +1,5 @@
+package InterviewPrepartionKit.HashMaps;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,8 +13,6 @@ public class CountTriplets {
       if(t1.containsKey(v)) t2.put(v*r, t2.getOrDefault(v*r, 0L) + t1.get(v));
       t1.put(v*r, t1.getOrDefault(v*r, 0L) + 1);
     }
-
     return c;
-
   }
 }
