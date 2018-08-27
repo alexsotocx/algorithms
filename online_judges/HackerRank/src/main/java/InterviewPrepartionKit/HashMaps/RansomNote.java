@@ -7,9 +7,9 @@ public class RansomNote {
   void checkMagazine(String[] magazine, String[] note) {
     HashMap<String, Integer> s1 = new HashMap<>();
     HashMap<String, Integer> s2 = new HashMap<>();
-    for(String s : magazine) s1.put(s, s1.getOrDefault(s, 0) + 1);
+    for (String s : magazine) s1.put(s, s1.getOrDefault(s, 0) + 1);
     boolean works = true;
-    for(String s : note) {
+    for (String s : note) {
       int c = s1.getOrDefault(s, 0);
       if (c != 0) {
         s1.put(s, c - 1);
@@ -19,7 +19,7 @@ public class RansomNote {
       }
     }
 
-    if(works) System.out.println("Yes");
+    if (works) System.out.println("Yes");
     else System.out.println("No");
 
   }

@@ -10,21 +10,23 @@ public class FrequencyQueries {
     HashMap<Integer, Integer> hf = new HashMap<>();
     HashMap<Integer, Integer> hn = new HashMap<>();
 
-    for(int[] q: queries) {
+    for (int[] q : queries) {
       int qn = q[0], num = q[1];
 
-      if(qn == 3) {
-        if(hf.getOrDefault(num, 0) != 0) result.add(1);
+      if (qn == 3) {
+        if (hf.getOrDefault(num, 0) != 0) result.add(1);
         else result.add(0);
         continue;
       }
 
       int count = hn.getOrDefault(num, 0);
-      if(count != 0){
+      if (count != 0) {
         hf.put(count, hf.get(count) - 1);
-      } else if(qn == 2 ) {continue;}
+      } else if (qn == 2) {
+        continue;
+      }
 
-      if(qn == 1) count++;
+      if (qn == 1) count++;
       else count--;
 
       hn.put(num, count);
