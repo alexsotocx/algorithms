@@ -13,18 +13,27 @@ import (
 func substrCount(n int, s string) int64 {
 	count := int64(0)
 	for i := n - 1; i >= 0; i-- {
+		same := i
+		first := byte(' ')
 		for j := 1; j <= n; j++ {
 			di := i + j
 			dj := i - j
-			if di >= n || dj < 0 || s[di] != s[dj] {
+			if j == 1 && di < n {
+				first = s[di]
+			}
+			if di >= n || dj < 0 || first != s[dj] || first != s[di] {
 				break
 			}
-			count++
+			if s[same] == s[di] && di-same == 1 {
+				same++
+			} else {
+				count++
+			}
 		}
 
 		for j := 0; j <= n; j++ {
-			di := i + j
-			if di >= n || s[di] != s[i] {
+			di := i - j
+			if di < 0 || s[di] != s[i] {
 				break
 			}
 			count++
