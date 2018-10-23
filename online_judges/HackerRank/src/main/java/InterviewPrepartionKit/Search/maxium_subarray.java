@@ -1,3 +1,5 @@
+package InterviewPrepartionKit.Search;
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -6,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class Solution {
+class cSf {
 
     // Complete the maximumSum function below.
     static long maximumSum(long[] a, long m) {

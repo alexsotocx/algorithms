@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class Solution {
+class Solution {
 
   // Complete the quickestWayUp function below.
   static int quickestWayUp(int[] ladders, int[] snakes) {
