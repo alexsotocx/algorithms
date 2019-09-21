@@ -1,28 +1,26 @@
 class ASeries:
-   def longest(self, values):
-     sorted_values = sorted(values)
-     longest = 0
-     diff = 0
-     new_serie = True
-     ac = 0
-     i = 0
-     while i < len(sorted_values) - 1:
-       current = sorted_values[i]
-       next = sorted_values[i + 1]
-       if new_serie or (diff == next - current):
-         diff = next - current
-         new_serie = False
-         ac += 1
-       else:
-         diff = 0
-         i -= 1
-         new_serie = True
-         ac = 0
-       i += 1
-       longest = ac if longest < ac else longest
-  
-     return longest + 1
-     
-t = (1, 1, 1, 1)
-print(ASeries().longest(t))
-          
+  def longest(self, values):
+    sorted_values = sorted(values)
+    values = {}
+    longest = 0
+    diffs = {}
+    for i in range(len(sorted_values)):
+      current = sorted_values[i]
+      values[current] = values[current] + 1 if current in values else 1
+      for j in range(i + 1, len(sorted_values)):
+        diffs[sorted_values[j] - current] = True
+
+    for diff in diffs:
+      for i in sorted_values:
+        maxs = 1
+        if diff == 0:
+          maxs = values[i]
+        else:
+          j = i + diff
+          while j in values:
+            maxs += 1
+            j += diff
+        longest = max(longest, maxs)
+
+    return longest
+
