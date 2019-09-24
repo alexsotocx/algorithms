@@ -1,6 +1,5 @@
 class ASeries:
-  def longest(self, values):
-    sorted_values = sorted(values)
+  def longest(self, sorted_values):
     values = {}
     longest = 0
     diffs = {}
