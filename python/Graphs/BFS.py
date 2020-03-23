@@ -1,22 +1,26 @@
 from dataclasses import dataclass
 
 @dataclass
-class Edge<T, W>:
-	vertex: T
-	weight: W
+class Edge:
+	vertex: int
+	weight: int
 
 
-class AdjancencyList:
-	def __init__(nodes_number: int):
-		adjancencyList = []
+class AdjacencyList:
+	def __init__(self, nodes_number: int):
+		adjacency = []
 		for i in range(nodes_number):
-			adjacencyList.append([])
-		
-		self._adjacencyList = adjacencyList
-		
-		
-	def self.add_vertex(u: int, v: int, weight: int = 1):
-		self.adjancecyList[u].append(v)
-		
-class BFS:
-	def __init__(graph: AdjancencyList):
+			adjacency.append([])
+		self._adjacencyList = adjacency
+
+
+	def add_vertex(self, u: int, v: int, weight: int):
+		self._adjacencyList[u].append(Edge(v, weight))
+
+
+	def edges_from(self, u: int):
+		return self._adjacencyList[u]
+
+x = AdjacencyList(5)
+x.add_vertex(1, 2, 1)
+print((x.edges_from(1)))
