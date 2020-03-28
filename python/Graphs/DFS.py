@@ -46,7 +46,7 @@ class DFSContainer:
         self.__dfs(edge.vertex)
     self._time = self._time + 1
     self._result.time[start] = self._time
-    self._result.colors[start] = GRAY
+    self._result.colors[start] = BLACK
 
 
 ad = AdjacencyList(6)
