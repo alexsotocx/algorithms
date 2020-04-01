@@ -4,24 +4,40 @@ package chapter1;
 Given a char array replace all the spaces for %20, the array will have enough capacity to handle the extra characters
  */
 public class Exercise1_3 {
+  static final char[] space = { '%', '2', '0'};
+  private char[] url;
+  private int fns;
 
-  void urify(int n, char[] uri) {
-    int i = n - 1; // Stores the last real element;
-    int j = uri.length - 1; // Stores the last element of the array, probably a space
-    while (i < j) {
-      if (uri[i] == ' ') {
-        addSpace(j, uri);
-        j -= 3;
-        i--;
-      } else {
-        uri[j--] = uri[i--];
-      }
-    }
+  public Exercise1_3(String url, int fns) {
+    this.url = url.toCharArray();
+    this.fns = fns;
   }
 
-  private void addSpace(int p, char[] uri) {
-    uri[p] = '0';
-    uri[p - 1] = '2';
-    uri[p - 2] = '%';
+  public String convert() {
+    int j = url.length - 1;
+    fns--; // Last available character
+    while (fns >= 0) {
+      if (url[fns] == ' ') {
+        j -= space.length - 1;
+        add(space, url, j);
+      } else {
+        add(url[fns], url, j);
+      }
+      fns--;
+      j--;
+
+    }
+    return new String(url);
+  }
+
+  private void add(char[] seq, char[] target, int j) {
+      for(char c : seq) {
+        target[j] = c;
+        j++;
+      }
+  }
+
+  private void add(char c, char[] target, int j) {
+    target[j] = c;
   }
 }
