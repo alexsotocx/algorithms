@@ -8,10 +8,10 @@ public class Exercise1_8Test {
   @Test
   public void testReplace() {
     int[][] x = new int[][]{
-      {1, 2, 4, 1, 0},
+      {1, 2, 4, 1, 1},
       {3, 7, 8, 9, 2},
-      {4, 3, 5, 6, 2},
-      {0, 1, 2, 3, 4}
+      {0, 3, 5, 6, 2},
+      {1, 1, 2, 3, 2}
     };
 
     new Exercise1_8(x).replace();

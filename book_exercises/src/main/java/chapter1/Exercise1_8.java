@@ -9,8 +9,7 @@ public class Exercise1_8 {
 
   public int[][] replace() {
     boolean row0 = false;
-    boolean column0 = false;
-    for(int i = 0; i < n(); i++) if(nmMatrix[i][0] == 0)  column0 = true;
+    // for(int i = 0; i < n(); i++) if(nmMatrix[i][0] == 0)  column0 = true;
     for(int i = 0; i < m(); i++) if(nmMatrix[0][i] == 0)  row0 = true;
     for (int i = 0; i < n(); i++) {
       for (int j = 0; j < m(); j++) {
@@ -22,14 +21,10 @@ public class Exercise1_8 {
     }
 
     replaceHorizontal(1);
-    replaceVertical(1);
+    replaceVertical(0);
     if (row0) {
       for (int j = 0; j < m(); j++) nmMatrix[0][j] = 0;
     }
-    if (column0) {
-      for (int i = 0; i < n(); i++) nmMatrix[i][0] = 0;
-    }
-
     return nmMatrix;
   }
 
