@@ -6,7 +6,7 @@ public class CountingElements {
     for (int c : arr) count[c]++;
     int total = 0;
     for (int i = 0; i <= 1000; i++) {
-      if(count[i] != 0 && count[i+1] != 0) {
+      if (count[i] != 0 && count[i + 1] != 0) {
         total += count[i];
       }
     }
