@@ -8,9 +8,9 @@ public class Binary {
     HashMap<Integer, Integer> map = new HashMap<>();
     int currentSum = 0, max = 0;
     map.put(0, -1);
-    for(int i=0; i< nums.length; i++) {
+    for (int i = 0; i < nums.length; i++) {
       currentSum += nums[i] == 0 ? -1 : 1;
-      if(map.containsKey(currentSum)) {
+      if (map.containsKey(currentSum)) {
         max = Math.max(max, i - map.get(currentSum));
         continue;
       }
