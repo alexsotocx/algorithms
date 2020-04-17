@@ -10,7 +10,7 @@ public class Exercise1_8 {
   public int[][] replace() {
     boolean row0 = false;
     // for(int i = 0; i < n(); i++) if(nmMatrix[i][0] == 0)  column0 = true;
-    for(int i = 0; i < m(); i++) if(nmMatrix[0][i] == 0)  row0 = true;
+    for (int i = 0; i < m(); i++) if (nmMatrix[0][i] == 0) row0 = true;
     for (int i = 0; i < n(); i++) {
       for (int j = 0; j < m(); j++) {
         if (nmMatrix[i][j] == 0) {

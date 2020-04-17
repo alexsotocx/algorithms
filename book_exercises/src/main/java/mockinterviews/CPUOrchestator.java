@@ -12,7 +12,7 @@ public class CPUOrchestator {
     Collections.sort(uniqueForeground);
     int maxCount = 0;
     int maxMemory = 0;
-    for(Integer bMemory : countBackground.keySet()) {
+    for (Integer bMemory : countBackground.keySet()) {
       int index = Collections.binarySearch(uniqueForeground, (memory - bMemory));
       if (index == -1) continue;
       int fMemory = index > 0 ? uniqueForeground.get(index) : uniqueForeground.get(-1 * (index + 2));
@@ -29,7 +29,7 @@ public class CPUOrchestator {
 
   private HashMap<Integer, Integer> countNumbers(ArrayList<Integer> array, int memory) {
     HashMap<Integer, Integer> count = new HashMap<>();
-    for(Integer c: array) {
+    for (Integer c : array) {
       if (memory < c) continue;
       count.put(c, count.getOrDefault(c, 0) + 1);
     }

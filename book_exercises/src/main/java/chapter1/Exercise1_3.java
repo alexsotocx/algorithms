@@ -4,7 +4,7 @@ package chapter1;
 Given a char array replace all the spaces for %20, the array will have enough capacity to handle the extra characters
  */
 public class Exercise1_3 {
-  static final char[] space = { '%', '2', '0'};
+  static final char[] space = {'%', '2', '0'};
   private char[] url;
   private int fns;
 
@@ -31,10 +31,10 @@ public class Exercise1_3 {
   }
 
   private void add(char[] seq, char[] target, int j) {
-      for(char c : seq) {
-        target[j] = c;
-        j++;
-      }
+    for (char c : seq) {
+      target[j] = c;
+      j++;
+    }
   }
 
   private void add(char c, char[] target, int j) {

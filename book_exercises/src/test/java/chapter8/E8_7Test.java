@@ -11,12 +11,12 @@ public class E8_7Test {
   @Test
   public void getPermutations() {
     String[] permutations = new String[]{
-        "ABC",
-        "ACB",
-        "BAC",
-        "BCA",
-        "CAB",
-        "CBA"
+      "ABC",
+      "ACB",
+      "BAC",
+      "BCA",
+      "CAB",
+      "CBA"
     };
 
     ArrayList<String> output = new E8_7("ABC").getPermutations();

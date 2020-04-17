@@ -8,9 +8,9 @@ public class SortedStack {
   Deque<Integer> temporal = new LinkedList<>();
 
   void push(int data) {
-    if(stack.isEmpty()) stack.push(data);
+    if (stack.isEmpty()) stack.push(data);
     else {
-      while(!stack.isEmpty() && stack.peek() > data) {
+      while (!stack.isEmpty() && stack.peek() > data) {
         temporal.push(stack.pop());
       }
       stack.push(data);
@@ -19,7 +19,7 @@ public class SortedStack {
   }
 
   void shift() {
-    while(!temporal.isEmpty()) stack.push(temporal.pop());
+    while (!temporal.isEmpty()) stack.push(temporal.pop());
   }
 
   int pop() {

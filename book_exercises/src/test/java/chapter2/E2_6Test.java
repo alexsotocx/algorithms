@@ -9,21 +9,21 @@ public class E2_6Test {
   @Test
   public void isPalindrome() {
     LNode first = new LNode(1,
-        new LNode(2,
-            new LNode(3,
-                new LNode(2, new LNode(1))
-            )
+      new LNode(2,
+        new LNode(3,
+          new LNode(2, new LNode(1))
         )
+      )
     );
 
     Assert.assertTrue(new E2_6().isPalindrome(first));
 
     first = new LNode(1,
-        new LNode(2,
-            new LNode(3,
-                new LNode(3, new LNode(2, new LNode(1)))
-            )
+      new LNode(2,
+        new LNode(3,
+          new LNode(3, new LNode(2, new LNode(1)))
         )
+      )
     );
 
     Assert.assertTrue(new E2_6().isPalindrome(first));
@@ -39,21 +39,21 @@ public class E2_6Test {
     Assert.assertFalse(new E2_6().isPalindrome(first));
 
     first = new LNode(1,
-        new LNode(2,
-            new LNode(3,
-                new LNode(4, new LNode(2, new LNode(1)))
-            )
+      new LNode(2,
+        new LNode(3,
+          new LNode(4, new LNode(2, new LNode(1)))
         )
+      )
     );
 
     Assert.assertFalse(new E2_6().isPalindrome(first));
 
     first = new LNode(1,
+      new LNode(3,
         new LNode(3,
-            new LNode(3,
-                new LNode(2, new LNode(1))
-            )
+          new LNode(2, new LNode(1))
         )
+      )
     );
 
     Assert.assertFalse(new E2_6().isPalindrome(first));

@@ -15,7 +15,7 @@ public class Exercise1_8Test {
     };
 
     new Exercise1_8(x).replace();
-    for(int i = 0; i < x.length; i++) {
+    for (int i = 0; i < x.length; i++) {
       System.out.println(Arrays.toString(x[i]));
     }
   }

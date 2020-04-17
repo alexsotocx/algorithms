@@ -7,10 +7,10 @@ class Main {
   static int m = 4;
   static int n = 4;
   static int[][] mat = new int[][]{
-      {1, 1, 0, 0},
-      {0, 1, 0, 0},
-      {0, 0, 1, 0},
-      {1, 0, 0, 0}
+    {1, 1, 0, 0},
+    {0, 1, 0, 0},
+    {0, 0, 1, 0},
+    {1, 0, 0, 0}
   };
 
   static boolean[][] visited;
