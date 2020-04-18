@@ -1,19 +1,19 @@
 package chapter4;
 
-import datastructures.BNode;
+import datastructures.BinaryNode;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class E4_12 {
-  private HashMap<BNode<Integer>, HashSet<Integer>> memo;
+  private HashMap<BinaryNode<Integer>, HashSet<Integer>> memo;
 
-  public int sumPath(int x, BNode<Integer> root) {
+  public int sumPath(int x, BinaryNode<Integer> root) {
     memo = new HashMap<>();
     return sumPathHelper(x, root, 0);
   }
 
-  private int sumPathHelper(int x, BNode<Integer> root, int sum) {
+  private int sumPathHelper(int x, BinaryNode<Integer> root, int sum) {
     if (root == null) return 0;
     if (!memo.containsKey(root)) memo.put(root, new HashSet<>());
     HashSet<Integer> set = memo.get(root);

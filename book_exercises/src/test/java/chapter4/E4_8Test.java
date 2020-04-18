@@ -1,6 +1,6 @@
 package chapter4;
 
-import datastructures.BNode;
+import datastructures.BinaryNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,13 +8,13 @@ public class E4_8Test {
 
   @Test
   public void findCommonAncestor() {
-    BNode<Integer> root = new BNode<>(1);
-    BNode<Integer> l1Left = new BNode<>(2);
-    BNode<Integer> l1right = new BNode<>(3);
-    BNode<Integer> l2lleft = new BNode<>(4);
-    BNode<Integer> l2lright = new BNode<>(5);
-    BNode<Integer> l2rleft = new BNode<>(6);
-    BNode<Integer> l2rright = new BNode<>(7);
+    BinaryNode<Integer> root = new BinaryNode<>(1);
+    BinaryNode<Integer> l1Left = new BinaryNode<>(2);
+    BinaryNode<Integer> l1right = new BinaryNode<>(3);
+    BinaryNode<Integer> l2lleft = new BinaryNode<>(4);
+    BinaryNode<Integer> l2lright = new BinaryNode<>(5);
+    BinaryNode<Integer> l2rleft = new BinaryNode<>(6);
+    BinaryNode<Integer> l2rright = new BinaryNode<>(7);
 
     root.left = l1Left;
     root.right = l1right;
