@@ -18,4 +18,10 @@ public class BinaryNode<T> {
   public boolean isLeaf() {
     return this.left == null && this.right == null;
   }
+
+  public void inOrder() {
+    if (this.left != null) this.left.inOrder();
+    System.out.println(this.data);
+    if (this.right != null) this.right.inOrder();
+  }
 }
