@@ -2,8 +2,6 @@ package chapter5;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 public class E5_3Test {
 
   @Test

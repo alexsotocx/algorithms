@@ -8,7 +8,7 @@ class RandomizedCollectionTest {
 
     @Test
     void insert() {
-      RandomizedCollection ds = new RandomizedCollection();
+      RandomizedCollectionHash ds = new RandomizedCollectionHash();
       assertTrue(ds.insert(10));
       assertTrue(ds.insert(30));
       assertFalse(ds.insert(10));

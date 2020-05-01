@@ -15,7 +15,7 @@ public class RandomizedCollectionHash {
   public boolean insert(int data) {
     Set<Integer> st = map.get(data);
     boolean contained = st != null;
-    if (!contained) { st = new LinkedHashSet<>(); map.put(data, st); }
+    if (!contained) { st = new HashSet<>(); map.put(data, st); }
     st.add(list.size());
     list.add(data);
     return !contained;
