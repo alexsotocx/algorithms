@@ -21,15 +21,15 @@ public class LFUCache {
 
   public void put(int key, int value) {
     if (capacity == 0) return;
-    if(!storedCache.containsKey(key)) {
-      if(storedCache.size() == capacity) removeLeastFrequentlyUsed();
+    if (!storedCache.containsKey(key)) {
+      if (storedCache.size() == capacity) removeLeastFrequentlyUsed();
     }
     storedCache.put(key, value);
     updateCount(key);
   }
 
   public int get(int key) {
-    if(storedCache.containsKey(key)) {
+    if (storedCache.containsKey(key)) {
       updateCount(key);
       return storedCache.get(key);
     }

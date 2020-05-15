@@ -5,8 +5,8 @@ public class SortedMerge {
     int aIterator = lastValidElementPosition;
     int bIterator = b.length - 1;
     int currentPosition = a.length - 1;
-    while(aIterator >= 0  && bIterator >= 0) {
-      if(a[aIterator] >= b[bIterator]) {
+    while (aIterator >= 0 && bIterator >= 0) {
+      if (a[aIterator] >= b[bIterator]) {
         a[currentPosition] = a[aIterator];
         aIterator--;
       } else {
@@ -15,7 +15,7 @@ public class SortedMerge {
       }
       currentPosition--;
     }
-    while(currentPosition >= 0) {
+    while (currentPosition >= 0) {
       if (bIterator < 0) {
         a[currentPosition] = a[aIterator--];
       } else {

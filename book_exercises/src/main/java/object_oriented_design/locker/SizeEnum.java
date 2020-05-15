@@ -6,6 +6,7 @@ public enum SizeEnum implements Comparable<SizeEnum> {
   Large(2);
 
   private final int size;
+
   private SizeEnum(int sizeCode) {
     this.size = sizeCode;
   }

@@ -2,7 +2,7 @@ package chapter8;
 
 public class TripleStep {
   long calculate(int n) {
-    long[] waysToN = new long[n+1];
+    long[] waysToN = new long[n + 1];
     waysToN[0] = 1;
     waysToN[1] = 1;
     for (int i = 2; i <= n; i++) {
