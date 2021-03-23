@@ -1,56 +1,36 @@
 from typing import List
 from dataclasses import dataclass
-from collections import deque, namedtuple
+from collections import deque
+from AdjacencyList import AdjacencyList
+
 INF = 1 << 31
 WHITE = 0
 GRAY = 1
 BLACK = 2
 
-
-@dataclass
-class Edge:
-    vertex: int
-    weight: int
-
-
 @dataclass
 class BFSResult:
     distance: List[int]
     colors: List[int]
-
-
-class AdjacencyList:
-    def __init__(self, nodes_number: int):
-        adjacency: List[List[Edge]] = []
-        for i in range(nodes_number):
-            adjacency.append([])
-        self._adjacencyList = adjacency
-
-    def add_vertex(self, u: int, v: int, weight: int = 1):
-        self._adjacencyList[u].append(Edge(v, weight))
-
-    def edges(self, u: int) -> List[Edge]:
-        return self._adjacencyList[u]
-
-    def size(self) -> int:
-        return len(self._adjacencyList)
+    ancestor: List[int]
 
 
 def bfs(start: int, adjL: AdjacencyList):
     q = deque()
     result = BFSResult(
         [INF for x in range(adjL.size())],
-        [WHITE for x in range(adjL.size())]
+        [WHITE for x in range(adjL.size())],
+        [None for x in range(adjL.size())]
     )
     result.distance[start] = 0
-
     q.append(start)
     while q:
         u = q.popleft()
         for v in adjL.edges(u):
             if result.colors[v.vertex] == WHITE:
                 result.distance[v.vertex] = result.distance[u] + 1
-                result.colors[u] = GRAY
+                result.colors[v.vertex] = GRAY
+                result.ancestor[v.vertex] = u
                 q.append(v.vertex)
         result.colors[u] = BLACK
 

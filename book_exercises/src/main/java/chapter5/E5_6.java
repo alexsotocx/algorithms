@@ -8,8 +8,8 @@ public class E5_6 {
   private int countSetBits(int x) {
     int count = 0;
     while (x != 0) {
-      count += x & 1;
-      x >>= 1;
+      count++;
+      x &= (x - 1);
     }
     return count;
   }

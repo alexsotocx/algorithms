@@ -1,6 +1,6 @@
 package chapter2;
 
-import datastructures.LNode;
+import datastructures.LinkedListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,10 +8,10 @@ public class E_28Test {
 
   @Test
   public void findCycle() {
-    LNode first = new LNode(1);
-    LNode second = new LNode(2);
-    LNode third = new LNode(3);
-    LNode fourth = new LNode(4);
+    LinkedListNode first = new LinkedListNode(1);
+    LinkedListNode second = new LinkedListNode(2);
+    LinkedListNode third = new LinkedListNode(3);
+    LinkedListNode fourth = new LinkedListNode(4);
     first.next = second;
     second.next = third;
     third.next = fourth;

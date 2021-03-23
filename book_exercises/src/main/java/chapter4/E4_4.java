@@ -1,20 +1,20 @@
 package chapter4;
 
-import datastructures.BNode;
+import datastructures.BinaryNode;
 
 public class E4_4 {
-  boolean isBalanced(BNode<Integer> root) {
+  boolean isBalanced(BinaryNode<Integer> root) {
     calculateHeight(root);
     return checkBalance(root);
   }
 
-  private int calculateHeight(BNode current) {
+  private int calculateHeight(BinaryNode current) {
     if (current == null) return 0;
     //if (current.height != -1) return current.height;
     return current.height = 1 + Math.max(calculateHeight(current.left), calculateHeight(current.right));
   }
 
-  private boolean checkBalance(BNode current) {
+  private boolean checkBalance(BinaryNode current) {
     if (current == null) return true;
     if (!checkBalance(current.left)) return false;
     if (!checkBalance(current.right)) return false;

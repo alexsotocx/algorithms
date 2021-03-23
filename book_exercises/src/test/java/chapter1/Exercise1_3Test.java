@@ -8,20 +8,16 @@ public class Exercise1_3Test {
 
   @Test
   public void urify() {
-    char[] t = "Mr John Smith    ".toCharArray();
-    new Exercise1_3().urify(13, t);
-    assertEquals("Mr%20John%20Smith", new String(t));
+    String t = "Mr John Smith    ";
+    assertEquals("Mr%20John%20Smith", new Exercise1_3(t, 13).convert());
 
-    t = "  MrJohnSmith    ".toCharArray();
-    new Exercise1_3().urify(13, t);
-    assertEquals("%20%20MrJohnSmith", new String(t));
+    t = "  MrJohnSmith    ";
+    assertEquals("%20%20MrJohnSmith", new Exercise1_3(t, 13).convert());
 
-    t = "MrJohnSmith".toCharArray();
-    new Exercise1_3().urify(13, t);
-    assertEquals("MrJohnSmith", new String(t));
+    t = "MrJohnSmith";
+    assertEquals("MrJohnSmith", new Exercise1_3(t, 11).convert());
 
-    t = "   ".toCharArray();
-    new Exercise1_3().urify(1, t);
-    assertEquals("%20", new String(t));
+    t = "   ";
+    assertEquals("%20", new Exercise1_3(t, 1).convert());
   }
 }
