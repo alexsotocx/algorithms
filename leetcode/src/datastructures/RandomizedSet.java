@@ -12,12 +12,16 @@ class RandomizedSet {
   private ArrayList<Integer> list = new ArrayList<>();
   private HashMap<Integer, Integer> map = new HashMap<>();
 
-  /** Initialize your data structure here. */
+  /**
+   * Initialize your data structure here.
+   */
   public RandomizedSet() {
 
   }
 
-  /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+  /**
+   * Inserts a value to the set. Returns true if the set did not already contain the specified element.
+   */
   public boolean insert(int data) {
     if (!map.containsKey(data)) {
       map.put(data, list.size());
@@ -27,7 +31,9 @@ class RandomizedSet {
     return false;
   }
 
-  /** Removes a value from the set. Returns true if the set contained the specified element. */
+  /**
+   * Removes a value from the set. Returns true if the set contained the specified element.
+   */
   public boolean remove(int data) {
     if (map.containsKey(data)) {
       int position = map.get(data);
@@ -42,7 +48,9 @@ class RandomizedSet {
     return false;
   }
 
-  /** Get a random element from the set. */
+  /**
+   * Get a random element from the set.
+   */
   public int getRandom() {
     return list.get(new Random().nextInt(list.size()));
   }
