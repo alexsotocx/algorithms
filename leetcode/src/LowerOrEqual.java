@@ -3,12 +3,12 @@ public class LowerOrEqual {
     int l = 0;
     int r = array.length - 1;
     int ans = -1;
-    while(l <= r) {
+    while (l <= r) {
       int mid = l + (r - l) / 2;
-      if(array[mid] > target) {
+      if (array[mid] > target) {
         r = mid - 1;
       } else {
-        if(ans == -1 || array[mid] > array[ans]) ans = mid;
+        if (ans == -1 || array[mid] > array[ans]) ans = mid;
         l = mid + 1;
       }
     }

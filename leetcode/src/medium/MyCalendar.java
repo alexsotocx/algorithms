@@ -1,7 +1,7 @@
 package medium;
 
 
-  import java.util.TreeSet;
+import java.util.TreeSet;
 
 class MyCalendar {
   TreeSet<Interval> booked = new TreeSet<>();
@@ -17,6 +17,7 @@ class MyCalendar {
 
   private class Interval implements Comparable<Interval> {
     int start, end;
+
     Interval(int start, int end) {
       this.start = start;
       this.end = end;
