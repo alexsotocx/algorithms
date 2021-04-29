@@ -18,7 +18,7 @@ class LeftMostColumnWithIndex {
     int cols = dimensions.get(1);
     int ans = -1;
     for (int i = 0; i < rows; i++) {
-      int columnsToSearch = ans == -1 ? cols : ans;
+      int columnsToSearch = ans == -1 ? cols : ans - 1;
       int min = leftMostOneIndex(binaryMatrix, i, columnsToSearch);
       if (ans == -1 || min != -1 && ans > min) ans = min;
     }
