@@ -41,7 +41,7 @@ public class BoundaryOfBinaryTree {
   }
 
   private void findLeafs(TreeNode root) {
-    if(root == null) return;
+    if (root == null) return;
     findLeafs(root.left);
     if (root.left == null && root.right == null) sol.add(root.val);
     findLeafs(root.right);
