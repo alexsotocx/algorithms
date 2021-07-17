@@ -5,7 +5,7 @@ import java.util.TreeSet;
 class MaxStack {
   static int count = 0;
 
-  private class Node implements Comparable<Node> {
+  class Node implements Comparable<Node> {
 
     int val;
     Node next;
