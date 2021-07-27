@@ -3,7 +3,7 @@ package google
 func plusOne(digits []int) []int {
 	n := len(digits)
 	offset := 1
-	for i := n - 1; i >= 0; {
+	for i := n - 1; i >= 0; i-- {
 		if offset == 1 {
 			if digits[i] == 9 {
 				offset = 1
