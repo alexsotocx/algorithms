@@ -23,14 +23,15 @@ func maxAB(a, b int) int {
 var solution = func(read4 func([]byte) int) func([]byte, int) int {
 	totalFile := make([]byte, 0)
 	readUntil := 0
+	mybuf := make([]byte, 4)
 	return func(buf []byte, n int) int {
 		charRead := 0
-		toRead := maxAB(n-len(totalFile)-readUntil, 0)
-		reads := toRead / 4
-		if (toRead % 4) != 0 {
+		currentlyOnBuffer := len(totalFile) - readUntil
+		timesToUseRead4 := maxAB(n-currentlyOnBuffer, 0)
+		reads := timesToUseRead4 / 4
+		if (timesToUseRead4 % 4) != 0 {
 			reads++
 		}
-		mybuf := make([]byte, 4)
 		for reads > 0 {
 			read := read4(mybuf)
 			for i := 0; i < read; i++ {
@@ -46,7 +47,6 @@ var solution = func(read4 func([]byte) int) func([]byte, int) int {
 			charRead++
 		}
 		readUntil += charRead
-
 		return charRead
 	}
 }
