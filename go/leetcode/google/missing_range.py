@@ -4,7 +4,7 @@ class Solution:
     i = 0
     missing = []
     highCover = False
-    while i < len(nums) and nextV < high:
+    while i < len(nums) and nextV <= high:
       c = nums[i]
       if c == nextV:
         nextV += 1
