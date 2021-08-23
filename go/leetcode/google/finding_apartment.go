@@ -21,7 +21,7 @@ func FindClosestApartment(blocks []map[string]bool, requirements []string) int {
 		for i, req := range requirements {
 			if actualBlock[req] {
 				found |= (one << i)
-				inWindow[req] = inWindow[req] + 1
+				inWindow[req]++
 			}
 		}
 		for found == completed {
@@ -36,7 +36,7 @@ func FindClosestApartment(blocks []map[string]bool, requirements []string) int {
 			startBlock := blocks[ws]
 			for i, req := range requirements {
 				if startBlock[req] {
-					inWindow[req] = inWindow[req] - 1
+					inWindow[req]--
 					if inWindow[req] == 0 {
 						found &= ^(one << i)
 					}
