@@ -1,6 +1,6 @@
 package google
 
-func isValid(c, cw []int) bool {
+func isValidWindow(c, cw []int) bool {
 	for k, v := range c {
 		if v > cw[k] {
 			return false
@@ -26,7 +26,7 @@ func minWindow(s string, t string) string {
 	smallR := r
 	validFound := false
 	for l <= r && r < len(s) {
-		if isValid(count, countInWindow) {
+		if isValidWindow(count, countInWindow) {
 			validFound = true
 			if r-l < smallerWindow {
 				smallerWindow = r - l
