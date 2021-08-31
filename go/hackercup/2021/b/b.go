@@ -26,7 +26,6 @@ func main() {
 	for i := 1; i <= cases; i++ {
 		var n int
 		fmt.Fscanf(reader, "%d\n", &n)
-		countMin := 0
 		minS := n + 1
 		horizontalWin := make([]int, n)
 		horizontalSets := make([][]pair, n)
@@ -54,33 +53,35 @@ func main() {
 
 		for j := 0; j < n; j++ {
 			v := verticalWin[j]
-			vSet := verticalSets[j]
-			if v != -1 {
-				if v < minS {
-					minS = v
-					countMin = 1
-				} else if v == minS {
-					countMin++
-				}
-			}
-
 			h := horizontalWin[j]
-			hSet := horizontalSets[j]
+			if v != -1 {
+				minS = min(v, minS)
+			}
 			if h != -1 {
-
-				if h < minS {
-					minS = h
-					countMin = 1
-				} else if h == minS {
-					if h == 1 && v == 1 && hSet[0] == vSet[0] {
-						continue
-					}
-					countMin++
-				}
+				minS = min(h, minS)
+			}
+		}
+		sols := make([][]pair, 0)
+		for j := 0; j < n; j++ {
+			v := verticalWin[j]
+			h := horizontalWin[j]
+			if v != -1 && v == minS {
+				sols = append(sols, verticalSets[j])
+			}
+			if h != -1 && h == minS {
+				sols = append(sols, horizontalSets[j])
 			}
 		}
 
-		if countMin != 0 {
+		if len(sols) != 0 {
+			countMin := len(sols)
+			if minS == 1 {
+				unique := make(map[pair]struct{})
+				for _, s := range sols {
+					unique[s[0]] = struct{}{}
+				}
+				countMin = len(unique)
+			}
 			fmt.Fprintf(&strB, "Case #%d: %d %d\n", i, minS, countMin)
 		} else {
 			fmt.Fprintf(&strB, "Case #%d: Impossible\n", i)
