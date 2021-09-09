@@ -20,9 +20,6 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 		p1 = p1.Next
 		p2 = p2.Next
 	}
-	if p1.Next != nil {
-		p1.Next = p1.Next.Next
-	}
-
+	p1.Next = p1.Next.Next
 	return head
 }
