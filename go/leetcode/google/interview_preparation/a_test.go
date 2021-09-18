@@ -13,7 +13,7 @@ func Test_resolve(t *testing.T) {
 		wantErr bool
 	}{
 		{name: "first", args: args{[]string{"/usr/user_a/home", "..", "desktop", "../.."}}, want: "/usr"},
-		{name: "second", args: args{[]string{"/usr/user_a/home", "..", "desktop", "../..", "user_b"}}, want: "/usr/user_b"},
+		{name: "second", args: args{[]string{"/usr/user_a/home", "..", "desktop", "../../user_b"}}, want: "/usr/user_b"},
 		{name: "third", args: args{[]string{"/usr/user_a/home", "..", "desktop", "../../../..", "user_b"}}, wantErr: true},
 		{name: "fourth", args: args{[]string{"/usr/user_a/home", "..", "desktop", "../..", ".."}}, want: "/"},
 	}
