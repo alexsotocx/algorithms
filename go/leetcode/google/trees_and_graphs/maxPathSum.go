@@ -1,11 +1,5 @@
 package google
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func maxAB(a, b int) int {
 	if a > b {
 		return a
