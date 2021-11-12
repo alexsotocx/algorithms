@@ -8,10 +8,11 @@ class Solution {
   private class UnionFind {
     int[] parent;
     int groups;
+
     UnionFind(int n) {
       groups = n;
       parent = new int[n];
-      IntStream.range(0, n).forEach(i-> parent[i] = i);
+      IntStream.range(0, n).forEach(i -> parent[i] = i);
     }
 
     int find(int i) {
@@ -32,15 +33,11 @@ class Solution {
       return groups;
     }
   }
+
   public int earliestAcq(int[][] logs, int n) {
     UnionFind uf = new UnionFind(n);
-    Arrays.sort(logs, new Comparator<int[]>() {
-      @Override
-      public int compare(int[] o1, int[] o2) {
-        return Integer.compare(o1[0], o2[0]);
-      }
-    });
-    for(int[] log : logs) {
+    Arrays.sort(logs, Comparator.comparingInt(o -> o[0]));
+    for (int[] log : logs) {
       uf.join(log[1], log[2]);
       if (uf.size() == 1) {
         return log[0];
