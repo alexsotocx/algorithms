@@ -9,7 +9,7 @@ class Solution {
   private ArrayList<String> res;
   private HashMap<String, TreeSet<String>> mapper;
 
-  private void replace(String[] w, int i, ArrayList<String> currentBuild) {
+  private void replace(String[] w, int i, String[] currentBuild) {
     if (i == w.length) {
       StringBuilder s = new StringBuilder();
 
@@ -21,14 +21,12 @@ class Solution {
 
     if (mapper.containsKey(c)) {
       for (String s : mapper.get(c)) {
-        currentBuild.add(s);
+        currentBuild[i] = s;
         replace(w, i + 1, currentBuild);
-        currentBuild.remove(currentBuild.size() - 1);
       }
     } else {
-      currentBuild.add(c);
+      currentBuild[i] = c;
       replace(w, i + 1, currentBuild);
-      currentBuild.remove(currentBuild.size() - 1);
     }
   }
 
@@ -39,7 +37,7 @@ class Solution {
       final String b = s.get(1);
       TreeSet<String> setA = mapper.get(a);
       TreeSet<String> setB = mapper.get(b);
-      TreeSet<String> set = new TreeSet<>();
+      TreeSet<String> set;
       if (setA != null && setB != null) {
         set = setA;
         for (String ss : setB) {
@@ -50,6 +48,8 @@ class Solution {
         set = setA;
       } else if (setB != null) {
         set = setB;
+      } else {
+        set = new TreeSet<>();
       }
       set.add(b);
       set.add(a);
@@ -58,7 +58,8 @@ class Solution {
     }
 
     res = new ArrayList<>();
-    this.replace(text.split(" +"), 0, new ArrayList<>());
+    String[] splitted = text.split(" +");
+    this.replace(splitted, 0, new String[splitted.length]);
 
     return res;
   }
