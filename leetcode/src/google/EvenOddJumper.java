@@ -20,12 +20,13 @@ public class EvenOddJumper {
         '}';
     }
   }
+
   public int oddEvenJumps(int[] arr) {
     HashSet<Integer> evenGoodJumpers = new HashSet<>();
     HashSet<Integer> oddGoodJumpers = new HashSet<>();
     TreeSet<Pair> orderHigh = new TreeSet<>((o1, o2) -> {
-        if (o1.value != o2.value) return Integer.compare(o1.value, o2.value);
-        return Integer.compare(o1.index, o2.index);
+      if (o1.value != o2.value) return Integer.compare(o1.value, o2.value);
+      return Integer.compare(o1.index, o2.index);
     });
 
     TreeSet<Pair> orderLow = new TreeSet<>((o1, o2) -> {
@@ -39,7 +40,7 @@ public class EvenOddJumper {
     orderHigh.add(new Pair(n, arr[n]));
     orderLow.add(new Pair(n, arr[n]));
 
-    for(int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i--) {
       Pair current = new Pair(i, arr[i]);
       Pair higher = orderHigh.higher(current);
       Pair lower = orderLow.lower(current);

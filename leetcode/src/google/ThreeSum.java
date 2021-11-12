@@ -3,8 +3,8 @@ package google;
 import java.util.*;
 
 public class ThreeSum {
-  class Pair  {
-    int i,j, x, y;
+  class Pair {
+    int i, j, x, y;
 
     public Pair(int i, int j, int x, int y) {
       this.i = i;
@@ -36,7 +36,7 @@ public class ThreeSum {
     HashMap<Integer, HashSet<Pair>> sums = new HashMap<>();
     HashSet<List<Integer>> answer = new HashSet<>();
     for (int i = 0; i < nums.length; i++) {
-      for (int j = i+1; j < nums.length; j++) {
+      for (int j = i + 1; j < nums.length; j++) {
         int total = nums[i] + nums[j];
         int finalJ = j;
         int finalI = i;
@@ -51,7 +51,7 @@ public class ThreeSum {
       int v = nums[i];
       int toFind = -v;
       if (sums.containsKey(toFind)) {
-        for (Pair p: sums.get(toFind)) {
+        for (Pair p : sums.get(toFind)) {
           if (p.isAfter(i)) {
             ArrayList<Integer> res = new ArrayList<>();
             res.add(nums[p.i]);
