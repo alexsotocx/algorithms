@@ -1,7 +1,10 @@
 package amazon.SortArrayByRank;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 class Solution {
   public int[] relativeSortArray(int[] arr1, int[] arr2) {
     HashMap<Integer, Integer> map = new HashMap<>();
@@ -12,7 +15,7 @@ class Solution {
       int xa = map.getOrDefault(a, inf);
       int xb = map.getOrDefault(b, inf);
       if (xa != xb) return Integer.compare(xa, xb);
-      return Integer.compare(a,  b);
+      return Integer.compare(a, b);
     });
 
     return x.stream().mapToInt(i -> i).toArray();
