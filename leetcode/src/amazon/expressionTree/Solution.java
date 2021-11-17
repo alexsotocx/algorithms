@@ -5,8 +5,6 @@ import java.util.Stack;
 
 abstract class Node {
   public abstract int evaluate();
-
-  int val;
 };
 
 interface IntFunction {
@@ -43,6 +41,8 @@ class OperatorNode extends Node {
 }
 
 class NumberNode extends Node {
+  int val;
+
   public NumberNode(String s) {
     this.val = Integer.parseInt(s);
   }
