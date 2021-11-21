@@ -5,19 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
-          this.val = val;
-          this.left = left;
-          this.right = right;
-      }
- }
+  int val;
+  TreeNode left;
+  TreeNode right;
+
+  TreeNode() {
+  }
+
+  TreeNode(int val) {
+    this.val = val;
+  }
+
+  TreeNode(int val, TreeNode left, TreeNode right) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
 class Solution {
   ArrayList<Integer> res;
+
   public List<Integer> boundaryOfBinaryTree(TreeNode root) {
     if (root == null) return new ArrayList<>();
     res = new ArrayList<>();
@@ -32,19 +40,19 @@ class Solution {
   }
 
   private void calculateLeftBoundary(TreeNode root) {
-    if(root == null) return;
+    if (root == null) return;
     if (isLeaf(root)) return;
     res.add(root.val);
-    if(root.left != null) calculateLeftBoundary(root.left);
+    if (root.left != null) calculateLeftBoundary(root.left);
     else {
       calculateLeftBoundary(root.right);
     }
   }
 
   private void calculateRightBoundary(TreeNode root) {
-    if(root == null) return;
+    if (root == null) return;
     if (isLeaf(root)) return;
-    if(root.right != null) calculateLeftBoundary(root.right);
+    if (root.right != null) calculateLeftBoundary(root.right);
     else {
       calculateLeftBoundary(root.left);
     }
@@ -52,7 +60,7 @@ class Solution {
   }
 
   private void calculateLeafs(TreeNode root) {
-    if(root == null) return;
+    if (root == null) return;
     if (isLeaf(root)) {
       res.add(root.val);
       return;
