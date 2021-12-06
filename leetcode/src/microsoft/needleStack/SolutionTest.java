@@ -2,17 +2,20 @@ package microsoft.needleStack;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolutionTest {
 
   @Test
   void precalculatePreSuf() {
-    String p = "aabaabaaa";
-    assertArrayEquals(new int[]{0, 1, 0, 1,2,3,4,5, 2}, new Solution().precalculatePreSuf(p));
+
   }
 
   @Test
   void strStr() {
+    assertEquals(2, new Solution().strStr("hello", "ll"));
+    assertEquals(-1, new Solution().strStr("aaaaa", "bba"));
+    assertEquals(12, new Solution().strStr("aaaaabbcbbcabba", "bba"));
+    assertEquals(0, new Solution().strStr("", ""));
   }
 }

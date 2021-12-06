@@ -4,34 +4,37 @@ class Solution {
 
   public int[] precalculatePreSuf(String s) {
     int[] b = new int[s.length()];
-    int i= 1, j = 0;
+    int i = 1, j = 0;
     b[0] = 0;
-    while(i < s.length()) {
-      while(j >= 0 && s.charAt(j) != s.charAt(i)) {
-        if (j - 1 < 0) {
-          i++;
+    while (i < s.length()) {
+      if (s.charAt(i) == s.charAt(j)) {
+        b[i++] = ++j;
+      } else {
+        j--;
+        if (j < 0) {
+          b[i] = 0;
           j = 0;
-          break;
+          i++;
+        } else {
+          j = b[j];
         }
-        j = b[j - 1];
       }
-      if (s.charAt(j) == s.charAt(i)) {
-        b[i] = j + 1;
-        i++;
-        j++;
-      }
+
     }
     return b;
   }
 
-  public int kmp(String target, String pattern ) {
+  public int kmp(String target, String pattern) {
     int[] pre = this.precalculatePreSuf(pattern);
     int i = 0;
     int j = 0;
-    while(i < target.length()) {
-      if (target.charAt(i) == target.charAt(j)) {
+    while (i < target.length()) {
+      if (target.charAt(i) == pattern.charAt(j)) {
         j++;
         i++;
+        if (j == pattern.length()) {
+          return i - j;
+        }
       } else {
         j--;
         if (j < 0) {
@@ -46,6 +49,7 @@ class Solution {
   }
 
   public int strStr(String haystack, String needle) {
-    return -1;
+    if (needle.length() == 0) return 0;
+    return kmp(haystack, needle);
   }
 }
