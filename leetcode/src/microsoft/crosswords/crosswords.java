@@ -9,6 +9,7 @@ class Solution {
   class TrieNode {
     String word;
     TrieNode[] nodes;
+
     public TrieNode() {
       nodes = new TrieNode[26];
     }
