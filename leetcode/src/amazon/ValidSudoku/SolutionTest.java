@@ -22,7 +22,5 @@ class SolutionTest {
       };
 
     assertFalse(new Solution().isValidSudoku(board));
-
-
   }
 }
