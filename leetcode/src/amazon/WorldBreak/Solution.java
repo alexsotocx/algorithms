@@ -3,6 +3,7 @@ package amazon.WorldBreak;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 class Solution {
   private class TrieNode {
@@ -32,23 +33,27 @@ class Solution {
 
   public boolean wordBreak(String s, List<String> wordDict) {
     TrieNode root = buildTrie(wordDict);
-    return canBeSplit(s, 0, root, new LinkedList<>());
+    return canBeSplit(s, root);
   }
 
-  private boolean canBeSplit(String s, int pos, TrieNode dict, LinkedList<String> phrase) {
-    if (pos == s.length()) {
-      return true;
-    }
-    TrieNode current = dict;
-    for (int i = pos; i < s.length(); i++) {
-      int n = s.charAt(i) - 'a';
-      if (current.nodes[n] == null) break;
-      current = current.nodes[n];
-      if (current.word != null) {
-        phrase.addLast(current.word);
-        if (canBeSplit(s, i + 1, dict, phrase)) return true;
-        phrase.removeLast();
+  private boolean canBeSplit(String s, TrieNode dict) {
+    Queue<Integer> lastPos = new LinkedList<>();
+    boolean[] visited = new boolean[s.length()];
+    lastPos.add(0);
+    while (!lastPos.isEmpty()) {
+      int pos = lastPos.poll();
+      if (pos == s.length()) return true;
+      if (visited[pos]) continue;
+      TrieNode current = dict;
+      for (int i = pos; i < s.length(); i++) {
+        int c = s.charAt(i) - 'a';
+        if (current.nodes[c] == null) break;
+        current = current.nodes[c];
+        if (current.word != null) {
+          lastPos.add(i + 1);
+        }
       }
+      visited[pos] = true;
     }
     return false;
   }
