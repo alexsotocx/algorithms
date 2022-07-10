@@ -13,9 +13,10 @@ class Solution:
 			else:
 				numMap[x] = [i]
 		added = set()
-		
-		for i in range(n):
+		i = 0
+		while i < n:
 			x = nums[i]
+			
 			j = i + 1
 			while j < n:
 				y = nums[j]
@@ -28,6 +29,7 @@ class Solution:
 						m.sort()
 						added.add(tuple(m))
 				j = bisect(nums, nums[j])
+			i = bisect(nums, nums[i])
 
 		return list(added)
 						
