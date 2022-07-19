@@ -13,10 +13,11 @@ class Solution:
     def util(self, board: List[List[str]], word: str, i: int, j: int, pos: int) -> bool:
         if not (0 <= i < len(board) and 0 <= j < len(board[i])):
             return False
-        if pos == len(word) - 1:
-            return True
         if word[pos] != board[i][j]:
             return False
+
+        if pos == len(word) - 1:
+            return True
 
         temp, board[i][j] = board[i][j], "#"
         tx = [0, 1, 0, -1]
