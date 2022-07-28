@@ -1,3 +1,4 @@
+
 from typing import List
 
 
@@ -14,23 +15,20 @@ class Solution:
         first = 0
         second = 0
         ans = []
-        while first < len(firstList) or second < len(secondList):
-            itemF = firstList[first] if first < len(firstList) else None
-            itemS = secondList[second] if second < len(secondList) else None
-            if itemF is not None and itemS is not None:
-                inter = self.insersect(itemF, itemS)
-                if (inter is not None):
-                    ans.append(inter)
-                if itemS[1] == itemF[1]:
-                    first += 1
-                    second += 1
-                elif itemS[1] < itemF[1]:
-                    second += 1
-                else:
-                    first += 1
-            else:
+        while first < len(firstList) and second < len(secondList):
+            itemF = firstList[first]
+            itemS = secondList[second]
+
+            inter = self.insersect(itemF, itemS)
+            if (inter is not None):
+                ans.append(inter)
+            if itemS[1] == itemF[1]:
                 first += 1
                 second += 1
+            elif itemS[1] < itemF[1]:
+                second += 1
+            else:
+                first += 1
         return ans
 
 
