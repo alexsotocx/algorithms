@@ -14,9 +14,8 @@ class Solution:
             current.pop()
             used[i] = False
 
-
-
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         unique = set()
         self.backtrack(nums, [], unique, [False for _ in range(len(nums))])
         return list(unique)
+
