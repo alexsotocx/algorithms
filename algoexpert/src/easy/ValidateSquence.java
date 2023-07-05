@@ -2,7 +2,7 @@ package easy;
 
 import java.util.*;
 
-class Program {
+class ValidateSequence {
   public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
     int p1 = 0;
     int aSize = array.size();
