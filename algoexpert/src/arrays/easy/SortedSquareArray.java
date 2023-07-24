@@ -1,4 +1,4 @@
-package easy;
+package arrays.easy;
 
 public class SortedSquareArray {
   public int[] sortedSquaredArray(int[] array) {
