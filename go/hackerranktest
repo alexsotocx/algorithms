@@ -1,0 +1,66 @@
+import { expect } from 'chai';
+import fetch from 'node-fetch';
+describe('test', () => {
+    interface IRequestParams {
+        pageNumber: number;
+    }
+
+    interface IOutletRanking {
+        id: number;
+        name: string;
+        city: string;
+        estimated_cost: number;
+        user_rating: { average_rating: number; votes: number };
+    }
+
+    interface IFoodRankingResponse {
+        page: number;
+        per_page: number;
+        total: number;
+        total_pages: number;
+        data: IOutletRanking[];
+    }
+
+    async function getFoodRankings(params: IRequestParams): Promise<IFoodRankingResponse> {
+        const request = await fetch(
+            `https://jsonmock.hackerrank.com/api/food_outlets?page=${params.pageNumber}&per_page=50`,
+        ); // this will time out but is the hacker rank editor
+        if (request.ok) {
+            return request.json();
+        } else {
+            // Handle proper error
+            throw new Error('mock api down');
+        }
+    }
+
+    async function findAllRankingsFromCity(city: string): Promise<IOutletRanking[]> {
+        const initialRequestResponse = await getFoodRankings({ pageNumber: 0 });
+        const results: IOutletRanking[] = initialRequestResponse.data;
+        for (let i = 1; i < initialRequestResponse.total_pages; i++) {
+            // can be done in parallel
+            const outlets = await getFoodRankings({ pageNumber: i });
+            results.push(...outlets.data);
+        }
+
+        return results.filter((r) => r.city === city);
+    }
+
+    async function finestFoodOutlet(city: string, votes: number): Promise<string> {
+        let cityRanks = await findAllRankingsFromCity(city);
+        if (cityRanks.length === 0) return '';
+        cityRanks = cityRanks.filter((c) => c.user_rating.votes >= votes);
+        cityRanks.sort((a, b) => a.user_rating.average_rating - b.user_rating.average_rating);
+        const highestRank = cityRanks[cityRanks.length - 1].user_rating.average_rating;
+        const outletsWithHighestRanks = cityRanks.filter((c) => c.user_rating.average_rating === highestRank);
+        outletsWithHighestRanks.sort((a, b) => a.user_rating.votes - b.user_rating.votes);
+
+        return outletsWithHighestRanks[outletsWithHighestRanks.length - 1].name;
+    }
+
+    it('works', async function () {
+        this.timeout(50000);
+        const response = await finestFoodOutlet('Seattle', 1000);
+        console.log(response);
+        expect('Cafe Juanita').to.deep.equal(response);
+    });
+});
