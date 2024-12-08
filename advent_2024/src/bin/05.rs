@@ -53,7 +53,10 @@ fn read_file<R: BufRead>(
 
         if section == 1 {
             let parts: Vec<i32> = line.split('|').map(|x| x.parse::<i32>().unwrap()).collect();
-            rules.entry(parts[1]).or_insert(HashSet::new()).insert(parts[0]);
+            rules
+                .entry(parts[1])
+                .or_insert(HashSet::new())
+                .insert(parts[0]);
         } else {
             let parts: Vec<i32> = line.split(',').map(|x| x.parse::<i32>().unwrap()).collect();
             test_lines.push(parts);
@@ -63,44 +66,77 @@ fn read_file<R: BufRead>(
     Ok((rules, test_lines))
 }
 
+fn valid_page(rules: &HashMap<i32, HashSet<i32>>, v: &Vec<i32>) -> bool {
+    let mut valid = true;
+    let empty_hash = &HashSet::new();
+
+    for i in 0..v.len() {
+        if !valid {
+            break;
+        }
+        let rule_set = rules.get(&v[i]).unwrap_or(empty_hash);
+        let valid_page_ordering = !((i + 1)..v.len()).any(|f| rule_set.contains(&v[f]));
+
+        valid &= valid_page_ordering
+    }
+
+    valid
+}
+
+fn fix_page(rules: &HashMap<i32, HashSet<i32>>, page: &Vec<i32>) -> i32 {
+    let empty_hash = &HashSet::new();
+
+    let mut fixed = page.clone();
+    let mut i = 0;
+
+    while i < fixed.len() {
+        let rule_set = rules.get(&fixed[i]).unwrap_or(empty_hash);
+        let valid_page_ordering = !((i + 1)..fixed.len()).any(|f| rule_set.contains(&fixed[f]));
+
+        if valid_page_ordering {
+            i += 1;
+        } else {
+            for j in (i + 1)..fixed.len() {
+                if rule_set.contains(&fixed[j]) {
+                    fixed.swap(i, j);
+                    break;
+                }
+            }
+        }
+    }
+
+    return fixed[fixed.len() / 2];
+}
+
 fn part1(rules: &HashMap<i32, HashSet<i32>>, test_lines: &Vec<Vec<i32>>) -> i32 {
     let mut result = 0;
-    let empty_hash = &HashSet::new();
     for v in test_lines {
-        let mut valid = true;
-        for i in 0..v.len() {
-            if !valid {
-                break;
-            }
-            let rule_set = rules.get(&v[i]).unwrap_or(empty_hash);
-            valid &= !((i+1)..v.len()).any(|f| rule_set.contains(&v[f]));
-        }
-        if valid {
+        if valid_page(rules, v) {
             result += v[v.len() / 2];
         }
     }
     result
 }
 
-// fn part2(input: &[String]) -> i32 {
-//     let mut result = 0;
-//     for i in 0..input.len() as i32 {
-//         for j in 0..input[0].len() as i32 {
-//             result += check_xmas(input, i, j);
-//         }
-//     }
-//     result
-// }
+fn part2(rules: &HashMap<i32, HashSet<i32>>, test_lines: &Vec<Vec<i32>>) -> i32 {
+    let mut result = 0;
+    for v in test_lines {
+        if !valid_page(rules, v) {
+            result += fix_page(rules, v);
+        }
+    }
+    result
+}
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let (rules, test_cases)= &read_file(BufReader::new(TEST.as_bytes()))?;
+    let (rules, test_cases) = &read_file(BufReader::new(TEST.as_bytes()))?;
     assert_eq!(part1(&rules, &test_cases), 143);
-    // assert_eq!(part2(&read_file(BufReader::new(TEST.as_bytes()))?), 9);
+    assert_eq!(part2(&rules, &test_cases), 123);
 
     let input_file = BufReader::new(File::open(INPUT_FILE)?);
     let (rulse_set, test_cases) = read_file(input_file)?;
     println!("Result part 1 = {}", part1(&rulse_set, &test_cases));
-    // println!("Result part 2 = {}", part2(&input_content));
+    println!("Result part 2 = {}", part2(&rulse_set, &test_cases));
 
     Ok(())
 }
