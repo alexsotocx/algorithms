@@ -18,14 +18,17 @@ const TEST: &str = "\
 292: 11 6 16 20
 ";
 
-
-fn read_file<R: BufRead>(reader: R) -> Result<Vec<(i64, Vec<i64>)>, Box<dyn Error>> {
-    let test_lines: Vec<(i64, Vec<i64>)> = reader
+fn read_file<R: BufRead>(reader: R) -> Result<Vec<(i128, Vec<i128>)>, Box<dyn Error>> {
+    let test_lines: Vec<(i128, Vec<i128>)> = reader
         .lines()
         .map(|line| {
             let line = line.expect("Failed to read line");
             let mut parts = line.split(": ");
-            let key = parts.next().expect("Failed to parse key").parse().expect("Failed to parse key as i32");
+            let key = parts
+                .next()
+                .expect("Failed to parse key")
+                .parse()
+                .expect("Failed to parse key as i32");
             let values = parts
                 .next()
                 .expect("Failed to parse values")
@@ -39,7 +42,17 @@ fn read_file<R: BufRead>(reader: R) -> Result<Vec<(i64, Vec<i64>)>, Box<dyn Erro
     Ok(test_lines)
 }
 
-fn solve_part_1(target: i64, values: &Vec<i64>, i: usize, current: i64) -> bool {
+fn concatenate(a: i128, b: i128) -> i128 {
+    let mut c = b;
+    let mut shift = 1;
+    while c > 0 {
+        shift *= 10;
+        c /= 10;
+    }
+    a * shift + b
+}
+
+fn solve_part_1(target: i128, values: &Vec<i128>, i: usize, current: i128) -> bool {
     if i == values.len() {
         return target == current;
     }
@@ -50,10 +63,29 @@ fn solve_part_1(target: i64, values: &Vec<i64>, i: usize, current: i64) -> bool 
     if solve_part_1(target, values, i + 1, current * values[i]) {
         return true;
     }
+
     false
 }
 
-fn part1(test_cases: &Vec<(i64, Vec<i64>)>) -> i64 {
+fn solve_part_2(target: i128, values: &Vec<i128>, i: usize, current: i128) -> bool {
+    if i == values.len() {
+        return target == current;
+    }
+
+    if solve_part_2(target, values, i + 1, current + values[i]) {
+        return true;
+    }
+    if solve_part_2(target, values, i + 1, current * values[i]) {
+        return true;
+    }
+
+    if solve_part_2(target, values, i + 1, concatenate(current, values[i])) {
+        return true;
+    }
+    false
+}
+
+fn part1(test_cases: &Vec<(i128, Vec<i128>)>) -> i128 {
     let mut sum = 0;
     for (target, values) in test_cases {
         if solve_part_1(*target, &values, 0, 0) {
@@ -63,16 +95,26 @@ fn part1(test_cases: &Vec<(i64, Vec<i64>)>) -> i64 {
     sum
 }
 
+fn part2(test_cases: &Vec<(i128, Vec<i128>)>) -> i128 {
+    let mut sum = 0;
+    for (target, values) in test_cases {
+        if solve_part_2(*target, &values, 0, 0) {
+            sum += target;
+        }
+    }
+    sum
+}
 
 fn main() -> Result<(), Box<dyn Error>> {
     let test_case = read_file(BufReader::new(TEST.as_bytes()))?;
+    assert_eq!(concatenate(128, 127), 128127);
     assert_eq!(part1(&test_case), 3749);
-    // assert_eq!(part2(&rules, &test_cases), 123);
+    assert_eq!(part2(&test_case), 11387);
 
     let input_file = BufReader::new(File::open(INPUT_FILE)?);
-    let mut test_case = read_file(input_file)?;
-    println!("Result part 1 = {}", part1(&mut test_case));
-    // println!("Result part 2 = {}", part2(&test_cases));
+    let test_case = read_file(input_file)?;
+    println!("Result part 1 = {}", part1(&test_case));
+    println!("Result part 2 = {}", part2(&test_case));
 
     Ok(())
 }
